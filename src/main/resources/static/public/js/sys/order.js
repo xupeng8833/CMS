@@ -1,42 +1,33 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '../sys/feedback/list',
+        url: '../sys/order/list',
         datatype: "json",
         colModel: [			
-			{ label: '意见反馈ID', name: 'feedbackId', index: 'feedback_id', sortable: false,width: 50, key: true },
-			{ label: '用户id', name: 'userId', index: 'user_id',sortable: false, width: 80 }, 			
-			{ label: '联系电话', name: 'mobile', index: 'mobile', sortable: false,width: 80 }, 			
-			{ label: '身份', name: 'identity', index: 'identity',sortable: false, width: 80 ,formatter: function(value, options, row){
-				if (value==0){
-					return "客户";
-				}
-				else if (value==1){
-					return "代理商";
-				}
-				else if (value==2){
-					return "补货员";
-				}
-				}}, 			
-			{ label: '反馈时间', name: 'createTime', index: 'create_time',sortable: false, width: 80 }	,
-			{ label: '回复', name: 'replyType', index: 'reply_type', sortable: false,width: 80 ,formatter:
+			{ label: '订单号', name: 'orderId', index: 'order_id',sortable: false, width: 80 }, 			
+			{ label: '商品名称', name: 'productName', index: 'product_name', sortable: false,width: 80 }, 			
+			{ label: '数量', name: 'productNum', index: 'product_num', sortable: false,width: 80 }, 			
+			{ label: '订单金额', name: 'orderPrice', index: 'order_price', sortable: false,width: 80 }, 			
+			{ label: '售卖机器编号', name: 'machineNum', index: 'machine_num', sortable: false,width: 80 }, 
+			{ label: '购买人ID', name: 'userId', index: 'user_id', sortable: false,width: 80 }, 
+			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 }	,
+			{ label: '支付方式 ', name: 'payType', index: 'pay_type',sortable: false, width: 80 ,formatter:
 				function (value, grid, rows, state) {
-					if(value === 0){
-						return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"reply(" + rows.feedbackId + ")\">回复</a>"	
-					}else if(value === 1){
-						return "已回复"
-					}
-					
+				if(value === 0){
+					return "微信支付"	
+				}else if(value === 1){
+					return "支付宝支付"
 				}
-			}
+				
+			}}			
         ],
 		viewrecords: true,
         height: 385,
         rowNum: 10,
 		rowList : [10,30,50],
-        rownumbers: true, 
+//        rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
-        multiselect: true,
+//        multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
             root: "page.list",
@@ -56,50 +47,45 @@ $(function () {
     });
 });
 
-//调用回复按钮
-var feedbackId = null;
-function reply(id){
-	 feedbackId = id
-	 document.getElementById("updateFeedback").click();
-}
-
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
 		q:{
 			userId: null,
-			mobile: null
+			orderId: null
 		},
 		showList: true,
 		title: null,
-		feedback: {}
+		order: {}
 	},
 	methods: {
 		query: function () {
 			$("#jqGrid").jqGrid('setGridParam',{ 
-                postData:{'userId': vm.q.userId,'mobile': vm.q.mobile},
+                postData:{'userId': vm.q.userId,'orderId': vm.q.orderId},
                 page:1 
             }).trigger("reloadGrid");
 		},
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.feedback = {};
+			vm.order = {};
 		},
 		update: function (event) {
-			if(feedbackId == null){
+			var id = getSelectedRow();
+			if(id == null){
 				return ;
 			}
 			vm.showList = false;
-            vm.title = "回复回馈";
-            vm.getInfo(feedbackId)
+            vm.title = "修改";
+            
+            vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.feedback.feedbackId == null ? "../sys/feedback/save" : "../sys/feedback/update";
+			var url = vm.order.id == null ? "../sys/order/save" : "../sys/order/update";
 			$.ajax({
 				type: "POST",
 			    url: url,
-			    data: JSON.stringify(vm.feedback),
+			    data: JSON.stringify(vm.order),
 			    success: function(r){
 			    	if(r.code === 0){
 						alert('操作成功', function(index){
@@ -112,16 +98,16 @@ var vm = new Vue({
 			});
 		},
 		del: function (event) {
-			var feedbackIds = getSelectedRows();
-			if(feedbackIds == null){
+			var ids = getSelectedRows();
+			if(ids == null){
 				return ;
 			}
 			
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/feedback/delete",
-				    data: JSON.stringify(feedbackIds),
+				    url: "../sys/order/delete",
+				    data: JSON.stringify(ids),
 				    success: function(r){
 						if(r.code == 0){
 							alert('操作成功', function(index){
@@ -134,9 +120,9 @@ var vm = new Vue({
 				});
 			});
 		},
-		getInfo: function(feedbackId){
-			$.get("../sys/feedback/info/"+feedbackId, function(r){
-                vm.feedback = r.feedback;
+		getInfo: function(id){
+			$.get("../sys/order/info/"+id, function(r){
+                vm.order = r.order;
             });
 		},
 		reload: function (event) {

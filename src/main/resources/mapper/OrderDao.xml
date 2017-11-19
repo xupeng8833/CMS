@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.OrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.OrderEntity" id="orderMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="productNum" column="product_num"/>
+        <result property="orderPrice" column="order_price"/>
+        <result property="machineNum" column="machine_num"/>
+        <result property="payType" column="pay_type"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.OrderEntity">
+		select * from tb_order where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.OrderEntity">
+		select * from tb_order
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_order 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.OrderEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_order
+		(
+			`order_id`, 
+			`user_id`, 
+			`product_name`, 
+			`product_num`, 
+			`order_price`, 
+			`machine_num`, 
+			`pay_type`, 
+			`create_time`
+		)
+		values
+		(
+			#{orderId}, 
+			#{userId}, 
+			#{productName}, 
+			#{productNum}, 
+			#{orderPrice}, 
+			#{machineNum}, 
+			#{payType}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.OrderEntity">
+		update tb_order 
+		<set>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="productName != null">`product_name` = #{productName}, </if>
+			<if test="productNum != null">`product_num` = #{productNum}, </if>
+			<if test="orderPrice != null">`order_price` = #{orderPrice}, </if>
+			<if test="machineNum != null">`machine_num` = #{machineNum}, </if>
+			<if test="payType != null">`pay_type` = #{payType}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_order where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_order where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
