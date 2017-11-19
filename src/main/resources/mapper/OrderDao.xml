@@ -22,14 +22,28 @@
 
 	<select id="queryList" resultType="com.system.entity.OrderEntity">
 		select * from tb_order
-        <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
-            </when>
-			<otherwise>
-                order by id desc
-			</otherwise>
-        </choose>
+       <where>
+			<if test="orderId != null and orderId.trim() != ''">
+				and order_id like concat('%', #{orderId}, '%') 
+			</if>
+			<if test="productName != null and productName.trim() != ''">
+				and product_name like concat('%', #{productName}, '%') 
+			</if>
+			<if test="machineNum != null and machineNum.trim() != ''">
+				and machine_num like concat('%', #{machineNum}, '%') 
+			</if>
+			<if test="userId != null and userId.trim() != ''">
+				and user_id like concat('%', #{userId}, '%') 
+			</if>
+			<!-- 时间范围查询 -->
+			<if test="benginTime != null and benginTime.trim() != ''">
+    			AND create_time &gt;#{benginTime,jdbcType=TIMESTAMP} 
+    		</if> 
+    		<if test="endTime != null and endTime.trim() != ''">
+    			AND create_time &lt;#{endTime,jdbcType=TIMESTAMP}
+    		</if>
+		</where>
+		order by id desc 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

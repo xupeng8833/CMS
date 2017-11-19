@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../public/css/main.css">
 <script src="../public/libs/jquery.min.js"></script>
 <script src="../public/plugins/layer/layer.js"></script>
+<script src="../public/plugins/laydate/laydate.js"></script>
 <script src="../public/libs/bootstrap.min.js"></script>
 <script src="../public/libs/vue.min.js"></script>
 <script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
@@ -24,17 +25,34 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 		
+			
 			<div class="form-group col-sm-1">
-				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="用户ID">
+				<input type="text" class="form-control" v-model="q.orderId" @keyup.enter="query" placeholder="订单号">
 			</div>
-			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.orderId" @keyup.enter="query" placeholder="电话">
-		
+			
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.productName" @keyup.enter="query" placeholder="商品名称">
+			</div>
+			
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.machineNum" @keyup.enter="query" placeholder="售卖机编号">
+			</div>
+			
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="购买人ID">
+			</div>
+			<div class="form-group col-sm-1" style="width: 60px;margin-left:10px;padding-right:0px;margin-bottom: 0px;margin-top: 8px;">时间：</div>
+			<div class="form-group col-xs-2">
+				<input type="text" class="form-control" id="benginTime" v-model="q.benginTime" @keyup.enter="query" placeholder="开始时间">
+			</div>
+			
+			<div class="form-group col-xs-2">
+				<input type="text" class="form-control" id="endTime" v-model="q.endTime" @keyup.enter="query" placeholder="结束时间">
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
 		
-			<!-- <a v-if="hasPermission('sys:order:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			<a v-if="hasPermission('sys:order:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('sys:order:exportExl')" class="btn btn-primary" @click="exportExl"><i class="fa fa-plus"></i>&nbsp;数据导出</a>
+			<!-- <a v-if="hasPermission('sys:order:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 			<a v-if="hasPermission('sys:order:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a> -->
 		</div>
 	    <table id="jqGrid"></table>
