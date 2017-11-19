@@ -26,3 +26,15 @@ CREATE TABLE `tb_order` (
   `create_time` datetime DEFAULT NULL COMMENT '购买时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+#保修信息管理表
+CREATE TABLE `tb_report` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `report_num` bigint(50) NOT NULL COMMENT '报修单号',
+  `machine_num` bigint(50) NOT NULL COMMENT '报修机器编号',
+  `reporter_name` varchar(100) NOT NULL COMMENT '报修人名称',
+  `reporter_type` bigint(5) DEFAULT 0 COMMENT '报修人类型 0客户、1代理商、2补货员',
+	`report_content` varchar(500) DEFAULT 0 COMMENT '报修备注',
+  `create_time` datetime DEFAULT NULL COMMENT '购买时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';

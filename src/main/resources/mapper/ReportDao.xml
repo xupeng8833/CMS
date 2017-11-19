@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.ReportDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.ReportEntity" id="reportMap">
+        <result property="id" column="id"/>
+        <result property="reportNum" column="report_num"/>
+        <result property="machineNum" column="machine_num"/>
+        <result property="reporterName" column="reporter_name"/>
+        <result property="reporterType" column="reporter_type"/>
+        <result property="reportContent" column="report_content"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.ReportEntity">
+		select * from tb_report where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.ReportEntity">
+		select * from tb_report
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_report 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.ReportEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_report
+		(
+			`report_num`, 
+			`machine_num`, 
+			`reporter_name`, 
+			`reporter_type`, 
+			`report_content`, 
+			`create_time`
+		)
+		values
+		(
+			#{reportNum}, 
+			#{machineNum}, 
+			#{reporterName}, 
+			#{reporterType}, 
+			#{reportContent}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.ReportEntity">
+		update tb_report 
+		<set>
+			<if test="reportNum != null">`report_num` = #{reportNum}, </if>
+			<if test="machineNum != null">`machine_num` = #{machineNum}, </if>
+			<if test="reporterName != null">`reporter_name` = #{reporterName}, </if>
+			<if test="reporterType != null">`reporter_type` = #{reporterType}, </if>
+			<if test="reportContent != null">`report_content` = #{reportContent}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_report where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_report where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
