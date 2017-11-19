@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.FeedbackDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.FeedbackEntity" id="feedbackMap">
+        <result property="feedbackId" column="feedback_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="mobile" column="mobile"/>
+        <result property="identity" column="identity"/>
+        <result property="feedbackContent" column="feedback_content"/>
+        <result property="replyType" column="reply_type"/>
+        <result property="replyContent" column="reply_content"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.FeedbackEntity">
+		select * from tb_feedback where feedback_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.FeedbackEntity">
+		select * from tb_feedback
+		
+		<where>
+			<if test="userId != null and userId.trim() != ''">
+				and user_id like concat('%', #{userId}, '%') 
+			</if>
+			<if test="mobile != null and mobile.trim() != ''">
+				and mobile like concat('%', #{mobile}, '%') 
+			</if>
+		</where>
+		order by feedback_id desc 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_feedback 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.FeedbackEntity" useGeneratedKeys="true" keyProperty="feedbackId">
+		insert into tb_feedback
+		(
+			`user_id`, 
+			`mobile`, 
+			`identity`, 
+			`feedback_content`, 
+			`reply_type`, 
+			`reply_content`, 
+			`create_time`
+		)
+		values
+		(
+			#{userId}, 
+			#{mobile}, 
+			#{identity}, 
+			#{feedbackContent}, 
+			#{replyType}, 
+			#{replyContent}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.FeedbackEntity">
+		update tb_feedback 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="identity != null">`identity` = #{identity}, </if>
+			<if test="feedbackContent != null">`feedback_content` = #{feedbackContent}, </if>
+			<if test="replyType != null">`reply_type` = #{replyType}, </if>
+			<if test="replyContent != null">`reply_content` = #{replyContent}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where feedback_id = #{feedbackId}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_feedback where feedback_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_feedback where feedback_id in 
+		<foreach item="feedbackId" collection="array" open="(" separator="," close=")">
+			#{feedbackId}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>意见反馈表</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../public/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../public/css/main.css">
+<script src="../public/libs/jquery.min.js"></script>
+<script src="../public/plugins/layer/layer.js"></script>
+<script src="../public/libs/bootstrap.min.js"></script>
+<script src="../public/libs/vue.min.js"></script>
+<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../public/js/common.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="用户ID">
+			</div>
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.mobile" @keyup.enter="query" placeholder="电话">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			<a v-if="hasPermission('sys:feedback:update')" v-show="false" id="updateFeedback" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">反馈人id:</div>
+			   	<div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="feedback.userId">{{feedback.userId}}</span>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">联系电话:</div>
+			   	<div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="feedback.mobile">{{feedback.mobile}}</span>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">反馈内容:</div>
+			   	<div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="feedback.feedbackContent">{{feedback.feedbackContent}}</span>
+			    </div>
+			</div>
+			
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">回复内容:</div>
+			   	<div class="col-sm-10">
+			   	<textarea rows="5" cols="50" style="resize:none;" v-model="feedback.replyContent"></textarea>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="提交回复"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="../public/js/sys/feedback.js"></script>
+</body>
+</html>
