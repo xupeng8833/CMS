@@ -63,7 +63,6 @@ function reply(id){
 	 document.getElementById("updateFeedback").click();
 }
 
-
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
