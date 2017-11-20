@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-11-20 20:07:08
+Date: 2017-11-20 22:52:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -254,7 +254,7 @@ CREATE TABLE `tb_report` (
   `report_num` bigint(50) NOT NULL COMMENT '报修单号',
   `machine_num` bigint(50) NOT NULL COMMENT '报修机器编号',
   `reporter_name` varchar(100) NOT NULL COMMENT '报修人名称',
-  `reporter_type` bigint(5) DEFAULT '0' COMMENT '报修人类型 0客户、1代理商、2补货员',
+  `reporter_type` varchar(100) DEFAULT '0' COMMENT '报修人类型 0客户、1代理商、2补货员',
   `repair_content` varchar(500) DEFAULT NULL,
   `report_content` varchar(500) DEFAULT '0' COMMENT '报修备注',
   `create_time` datetime DEFAULT NULL COMMENT '购买时间',
@@ -264,7 +264,7 @@ CREATE TABLE `tb_report` (
 -- ----------------------------
 -- Records of tb_report
 -- ----------------------------
-INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '0', null, '坏了', '2017-11-19 23:27:57');
+INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '经销商', null, '坏了', '2017-11-19 23:27:57');
 
 -- ----------------------------
 -- Table structure for tb_token
