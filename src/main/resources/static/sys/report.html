@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="../public/css/main.css">
 <script src="../public/libs/jquery.min.js"></script>
 <script src="../public/plugins/layer/layer.js"></script>
-
 <script src="../public/libs/bootstrap.min.js"></script>
 <script src="../public/libs/vue.min.js"></script>
 <script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
@@ -25,8 +24,8 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			<div class="form-group col-sm-1">
-				<input type="text" class="form-control" v-model="q.orderId" @keyup.enter="query" placeholder="订单号">
+				<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.reportNum" @keyup.enter="query" placeholder="报修单号">
 			</div>
 			
 			<div class="form-group col-sm-1">
@@ -46,8 +45,9 @@
 				<input type="text" class="form-control" id="endTime" v-model="q.endTime" @keyup.enter="query" placeholder="结束时间">
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
-		
-			<a v-if="hasPermission('sys:report:update')" v-show="false" class="btn btn-primary" id="getReportInfo" @click="update"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			
+			<a v-if="hasPermission('sys:report:update')" id="getReportInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+
 		</div>
 	    <table id="jqGrid"></table>
 	    <div id="jqGridPager"></div>
@@ -81,11 +81,27 @@
 			    </div>
 			</div>
 									<div class="form-group">
+			   	<div class="col-sm-2 control-label"></div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="report.repairContent" placeholder=""/>
+			    </div>
+			</div>
+			
+			<div class="form-group">
 			   	<div class="col-sm-2 control-label">报修备注</div>
 			   	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="report.reportContent" placeholder="报修备注"/>
 			    </div>
 			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">维修反馈信息</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="report.repairContent" placeholder="维修反馈信息"/>
+			    </div>
+			</div>
+			
+			
 									<div class="form-group">
 			   	<div class="col-sm-2 control-label">购买时间</div>
 			   	<div class="col-sm-10">

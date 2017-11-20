@@ -17,20 +17,23 @@ $(function () {
 				}
 				
 			} }, 			
-			{ label: '报修备注', name: 'reportContent', index: 'report_content', sortable: false,width: 80 }, 			
+			{ label: '报修备注', name: 'reportContent', index: 'report_content', sortable: false,width: 80 }, 
+			{ label: '维修反馈信息', name: 'repairContent', index: 'repair_content', sortable: false,width: 80 ,hidden: true}, 			
 			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 }	,
 			{ label: '操作', name: 'id', index: 'id', sortable: false,width: 80 ,formatter:
 				function (value, grid, rows, state) {
-					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getInfo(" + rows.id + ")\">操作</a>"	
+					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReportInfo(" + value + ")\">操作</a>"	
 				}
-			}	
+			}			
         ],
 		viewrecords: true,
         height: 385,
         rowNum: 10,
 		rowList : [10,30,50],
+        rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
+        multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
             root: "page.list",
@@ -50,6 +53,7 @@ $(function () {
     });
 });
 
+
 //执行一个laydate实例
 laydate.render({
   elem: '#benginTime' //指定元素
@@ -63,12 +67,13 @@ laydate.render({
   ,theme: '#393D49'
 });
 
+//点击操作隐藏按钮的功能
 //调用回复按钮
 var id = null;
-function getInfo(id){
-	 id = id
-	 document.getElementById("getReportInfo").click();
-}
+function getReportInfo(id){
+	id = id 
+	alert(id);
+};
 
 var vm = new Vue({
 	el:'#rrapp',
@@ -97,6 +102,7 @@ var vm = new Vue({
 			vm.report = {};
 		},
 		update: function (event) {
+			var id = getSelectedRow();
 			if(id == null){
 				return ;
 			}

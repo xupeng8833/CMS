@@ -27,9 +27,18 @@ public class ReportEntity implements Serializable {
 	private Long reporterType;
 	//报修备注
 	private String reportContent;
+	//维修反馈信息
+	private String repairContent;
 	//购买时间
 	private Date createTime;
 
+	
+	public String getRepairContent() {
+		return repairContent;
+	}
+	public void setRepairContent(String repairContent) {
+		this.repairContent = repairContent;
+	}
 	/**
 	 * 设置：主键
 	 */
