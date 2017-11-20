@@ -24,7 +24,7 @@ public class ReportEntity implements Serializable {
 	//报修人名称
 	private String reporterName;
 	//报修人类型 0客户、1代理商、2补货员
-	private Long reporterType;
+	private String reporterType;
 	//报修备注
 	private String reportContent;
 	//维修反馈信息
@@ -33,6 +33,13 @@ public class ReportEntity implements Serializable {
 	private Date createTime;
 
 	
+	
+	public String getReporterType() {
+		return reporterType;
+	}
+	public void setReporterType(String reporterType) {
+		this.reporterType = reporterType;
+	}
 	public String getRepairContent() {
 		return repairContent;
 	}
@@ -86,18 +93,6 @@ public class ReportEntity implements Serializable {
 	 */
 	public String getReporterName() {
 		return reporterName;
-	}
-	/**
-	 * 设置：报修人类型 0客户、1代理商、2补货员
-	 */
-	public void setReporterType(Long reporterType) {
-		this.reporterType = reporterType;
-	}
-	/**
-	 * 获取：报修人类型 0客户、1代理商、2补货员
-	 */
-	public Long getReporterType() {
-		return reporterType;
 	}
 	/**
 	 * 设置：报修备注

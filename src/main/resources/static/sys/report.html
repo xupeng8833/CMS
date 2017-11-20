@@ -56,62 +56,92 @@
     <div v-show="!showList" class="panel panel-default">
 		<div class="panel-heading">{{title}}</div>
 		<form class="form-horizontal">
-											<div class="form-group">
-			   	<div class="col-sm-2 control-label">报修单号</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修时间:</div>
+			  <!--  	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="report.createTime" placeholder="购买时间"/>
+			    </div> -->
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="report.createTime">{{report.createTime}}</span>
+			    </div>
+			</div>
+		
+		<!-- 	<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修单号:</div>
 			   	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="report.reportNum" placeholder="报修单号"/>
 			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">报修机器编号</div>
-			   	<div class="col-sm-10">
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="report.reportNum">{{report.reportNum}}</span>
+			    </div>
+			</div> -->
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修机器编号:</div>
+			   	
+			   <!-- 	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="report.machineNum" placeholder="报修机器编号"/>
+			    </div> -->
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="report.machineNum">{{report.machineNum}}</span>
 			    </div>
+			    
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">报修人名称</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="report.reporterName" placeholder="报修人名称"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">报修人类型 0客户、1代理商、2补货员</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修机器地址:</div>
 			   	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="report.reporterType" placeholder="报修人类型 0客户、1代理商、2补货员"/>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label"></div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="report.repairContent" placeholder=""/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修人名称:</div>
+			    
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="report.reporterName">{{report.reporterName}}</span>
+			      <span v-model="report.reporterType">({{report.reporterType}})</span>
 			    </div>
 			</div>
 			
 			<div class="form-group">
-			   	<div class="col-sm-2 control-label">报修备注</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="report.reportContent" placeholder="报修备注"/>
+			   	<div class="col-sm-2 control-label">报修备注:</div>
+			     <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="report.reportContent">{{report.reportContent}}</span>
 			    </div>
 			</div>
 			
 			<div class="form-group">
-			   	<div class="col-sm-2 control-label">维修反馈信息</div>
+			   	<div class="col-sm-2 control-label">对应经销商:</div>
 			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="report.reporterType" placeholder="报修人类型 0客户、1代理商、2补货员"/>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">对应补货员:</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="report.reporterType" placeholder="报修人类型 0客户、1代理商、2补货员"/>
+			    </div>
+			</div>
+			
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">维修反馈信息:</div>
+			   	<!-- <div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="report.repairContent" placeholder="维修反馈信息"/>
+			    </div> -->
+			    <div class="col-sm-10">
+			   	<textarea rows="5" cols="50" style="resize:none;" v-model="report.repairContent" placeholder="维修反馈信息"></textarea>
 			    </div>
 			</div>
 			
 			
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">购买时间</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="report.createTime" placeholder="购买时间"/>
-			    </div>
-			</div>
-							<div class="form-group">
+			
+			<div class="form-group">
 				<div class="col-sm-2 control-label"></div> 
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+				<!-- <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp; --><input type="button" class="btn btn-warning" @click="reload" value="返回"/>
 			</div>
 		</form>
 	</div>

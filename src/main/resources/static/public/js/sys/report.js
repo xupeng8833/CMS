@@ -6,17 +6,7 @@ $(function () {
 			{ label: '报修单号', name: 'reportNum', index: 'report_num',sortable: false, width: 80 }, 			
 			{ label: '报修机器编号', name: 'machineNum', index: 'machine_num',sortable: false, width: 80 }, 			
 			{ label: '报修人', name: 'reporterName', index: 'reporter_name', sortable: false,width: 80 }, 			
-			{ label: '报修人身份', name: 'reporterType', index: 'reporter_type',sortable: false, width: 80,formatter:
-				function (value, grid, rows, state) {
-				if(value === 0){
-					return "客户"	
-				}else if(value === 1){
-					return "代理商"
-				}else if(value === 2){
-					return "补货员"
-				}
-				
-			} }, 			
+			{ label: '报修人身份', name: 'reporterType', index: 'reporter_type',sortable: false, width: 80}, 			
 			{ label: '报修备注', name: 'reportContent', index: 'report_content', sortable: false,width: 80 }, 
 			{ label: '维修反馈信息', name: 'repairContent', index: 'repair_content', sortable: false,width: 80 ,hidden: true}, 			
 			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 }	,
@@ -108,7 +98,7 @@ var vm = new Vue({
 				return ;
 			}
 			vm.showList = false;
-            vm.title = "修改";
+            vm.title = "报修详情";
             
             vm.getInfo(reportId)
 		},
