@@ -27,6 +27,7 @@ CREATE TABLE `tb_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='订单表';
 
+
 #保修信息管理表
 CREATE TABLE `tb_report` (
   `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
