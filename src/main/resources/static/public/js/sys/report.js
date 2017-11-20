@@ -69,10 +69,10 @@ laydate.render({
 
 //点击操作隐藏按钮的功能
 //调用回复按钮
-var id = null;
+var reportId = null;
 function getReportInfo(id){
-	id = id 
-	alert(id);
+	reportId = id
+    document.getElementById("getReportInfo").click(); 
 };
 
 var vm = new Vue({
@@ -102,14 +102,14 @@ var vm = new Vue({
 			vm.report = {};
 		},
 		update: function (event) {
-			var id = getSelectedRow();
-			if(id == null){
+			//var id = getSelectedRow();
+			if(reportId == null){
 				return ;
 			}
 			vm.showList = false;
             vm.title = "修改";
             
-            vm.getInfo(id)
+            vm.getInfo(reportId)
 		},
 		saveOrUpdate: function (event) {
 			var url = vm.report.id == null ? "../sys/report/save" : "../sys/report/update";

@@ -46,7 +46,7 @@
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
 			
-			<a v-if="hasPermission('sys:report:update')" id="getReportInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('sys:report:update')" v-show="false" id="getReportInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 
 		</div>
 	    <table id="jqGrid"></table>
