@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-11-20 22:52:48
+Date: 2017-11-20 23:30:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -71,6 +71,8 @@ INSERT INTO `sys_log` VALUES ('16', 'admin', '修改菜单', 'com.system.control
 INSERT INTO `sys_log` VALUES ('17', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-cog\",\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-19 22:52:42');
 INSERT INTO `sys_log` VALUES ('18', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-19 22:55:58');
 INSERT INTO `sys_log` VALUES ('19', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-20 20:06:08');
+INSERT INTO `sys_log` VALUES ('20', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"补货管理\",\"orderNum\":9,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:replenishment:list,sys:replenishment:update,sys:replenishment:info\",\"type\":1,\"url\":\"sys/replenishment.html\"}', '127.0.0.1', '2017-11-20 23:25:10');
+INSERT INTO `sys_log` VALUES ('21', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-file-text\",\"menuId\":34,\"name\":\"补货管理\",\"orderNum\":9,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:replenishment:list,sys:replenishment:update,sys:replenishment:info\",\"type\":1,\"url\":\"sys/replenishment.html\"}', '127.0.0.1', '2017-11-20 23:27:59');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -86,7 +88,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -112,6 +114,7 @@ INSERT INTO `sys_menu` VALUES ('30', '0', '意见反馈管理', 'sys/feedback.ht
 INSERT INTO `sys_menu` VALUES ('31', '0', '订单管理', 'sys/order.html', 'sys:order:list', '1', 'fa fa-th-list', '7');
 INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:exportExl', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
+INSERT INTO `sys_menu` VALUES ('34', '0', '补货管理', 'sys/replenishment.html', 'sys:replenishment:list,sys:replenishment:update,sys:replenishment:info', '1', 'fa fa-file-text', '9');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -244,6 +247,30 @@ CREATE TABLE `tb_order` (
 -- ----------------------------
 INSERT INTO `tb_order` VALUES ('1', '11', '111', '111', '2', '2', '2', '0', '2017-11-21 17:23:31');
 INSERT INTO `tb_order` VALUES ('2', '22', '222', '222', '1', '34', '3', '0', '2017-11-07 17:23:49');
+
+-- ----------------------------
+-- Table structure for tb_replenishment
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_replenishment`;
+CREATE TABLE `tb_replenishment` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `replenishment_num` bigint(50) NOT NULL COMMENT '补货单号',
+  `machine_num` bigint(50) NOT NULL COMMENT '补货机器编号',
+  `product_name` varchar(100) NOT NULL COMMENT '补货商品',
+  `product_num` varchar(100) DEFAULT '0' COMMENT '补充数量',
+  `apply_name` varchar(100) DEFAULT NULL COMMENT '申请人',
+  `reporter_identity` varchar(100) DEFAULT '0' COMMENT '申请人身份',
+  `apply_type` varchar(100) DEFAULT NULL COMMENT '补充状态',
+  `replenishment_name` varchar(100) NOT NULL COMMENT '补货商品',
+  `create_time` datetime DEFAULT NULL COMMENT '申请时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
+
+-- ----------------------------
+-- Records of tb_replenishment
+-- ----------------------------
+INSERT INTO `tb_replenishment` VALUES ('1', '1', '1', '1', '2', '2', '2', '2', '2', '2017-11-21 23:29:42');
+INSERT INTO `tb_replenishment` VALUES ('2', '2', '2', '2', '2', '2', '2', '2', '2', '2017-11-21 23:29:54');
 
 -- ----------------------------
 -- Table structure for tb_report

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.ReplenishmentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.ReplenishmentEntity" id="replenishmentMap">
+        <result property="id" column="id"/>
+        <result property="replenishmentNum" column="replenishment_num"/>
+        <result property="machineNum" column="machine_num"/>
+        <result property="productName" column="product_name"/>
+        <result property="productNum" column="product_num"/>
+        <result property="applyName" column="apply_name"/>
+        <result property="reporterIdentity" column="reporter_identity"/>
+        <result property="applyType" column="apply_type"/>
+        <result property="replenishmentName" column="replenishment_name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.ReplenishmentEntity">
+		select * from tb_replenishment where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.ReplenishmentEntity">
+		select * from tb_replenishment
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_replenishment 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.ReplenishmentEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_replenishment
+		(
+			`replenishment_num`, 
+			`machine_num`, 
+			`product_name`, 
+			`product_num`, 
+			`apply_name`, 
+			`reporter_identity`, 
+			`apply_type`, 
+			`replenishment_name`, 
+			`create_time`
+		)
+		values
+		(
+			#{replenishmentNum}, 
+			#{machineNum}, 
+			#{productName}, 
+			#{productNum}, 
+			#{applyName}, 
+			#{reporterIdentity}, 
+			#{applyType}, 
+			#{replenishmentName}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.ReplenishmentEntity">
+		update tb_replenishment 
+		<set>
+			<if test="replenishmentNum != null">`replenishment_num` = #{replenishmentNum}, </if>
+			<if test="machineNum != null">`machine_num` = #{machineNum}, </if>
+			<if test="productName != null">`product_name` = #{productName}, </if>
+			<if test="productNum != null">`product_num` = #{productNum}, </if>
+			<if test="applyName != null">`apply_name` = #{applyName}, </if>
+			<if test="reporterIdentity != null">`reporter_identity` = #{reporterIdentity}, </if>
+			<if test="applyType != null">`apply_type` = #{applyType}, </if>
+			<if test="replenishmentName != null">`replenishment_name` = #{replenishmentName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_replenishment where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_replenishment where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
