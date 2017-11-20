@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-11-19 08:59:53
+Date: 2017-11-20 20:07:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -57,6 +57,20 @@ INSERT INTO `sys_log` VALUES ('2', 'admin', '删除定时任务', 'com.cf.contro
 INSERT INTO `sys_log` VALUES ('3', 'admin', '删除菜单', 'com.cf.controller.SysMenuController.delete()', '[7,8,9,10,11,12,13,14]', '127.0.0.1', '2017-11-19 08:06:03');
 INSERT INTO `sys_log` VALUES ('4', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,28],\"remark\":\"x\",\"roleName\":\"xp\"}', '127.0.0.1', '2017-11-19 08:50:34');
 INSERT INTO `sys_log` VALUES ('5', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":1,\"name\":\"权限管理\",\"orderNum\":0,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":0}', '127.0.0.1', '2017-11-19 08:51:21');
+INSERT INTO `sys_log` VALUES ('6', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-pencil-square\",\"name\":\"意见反馈管理\",\"orderNum\":1,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":0}', '127.0.0.1', '2017-11-19 10:24:57');
+INSERT INTO `sys_log` VALUES ('7', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-pencil-square\",\"menuId\":30,\"name\":\"意见反馈管理\",\"orderNum\":1,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":1,\"url\":\"sys/feedback.html\"}', '127.0.0.1', '2017-11-19 10:26:51');
+INSERT INTO `sys_log` VALUES ('8', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-pencil-square\",\"menuId\":30,\"name\":\"意见反馈管理\",\"orderNum\":1,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:feedback:list,sys:feedback:info,sys:feedback:save,sys:feedback:update,sys:feedback:delete\",\"type\":1,\"url\":\"sys/feedback.html\"}', '127.0.0.1', '2017-11-19 10:28:22');
+INSERT INTO `sys_log` VALUES ('9', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-list\",\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":1,\"url\":\"\"}', '127.0.0.1', '2017-11-19 16:34:02');
+INSERT INTO `sys_log` VALUES ('10', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-list\",\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":1,\"url\":\"/sys/order/list\"}', '127.0.0.1', '2017-11-19 16:34:19');
+INSERT INTO `sys_log` VALUES ('11', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-list\",\"menuId\":31,\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:order:list,sys:order:info,sys:order:save,sys:order:update,sys:order:delete\",\"type\":1,\"url\":\"/sys/order/list\"}', '127.0.0.1', '2017-11-19 17:07:13');
+INSERT INTO `sys_log` VALUES ('12', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-list\",\"menuId\":31,\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:order:list\",\"type\":1,\"url\":\"/sys/order/list\"}', '127.0.0.1', '2017-11-19 17:14:19');
+INSERT INTO `sys_log` VALUES ('13', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-list\",\"menuId\":31,\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:order:list\",\"type\":1,\"url\":\"sys/order.html\"}', '127.0.0.1', '2017-11-19 17:19:02');
+INSERT INTO `sys_log` VALUES ('14', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"数据导出\",\"orderNum\":0,\"parentId\":31,\"parentName\":\"订单管理\",\"perms\":\"sys:order:export\",\"type\":2}', '127.0.0.1', '2017-11-19 17:35:39');
+INSERT INTO `sys_log` VALUES ('15', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":32,\"name\":\"数据导出\",\"orderNum\":0,\"parentId\":31,\"parentName\":\"订单管理\",\"perms\":\"sys:order:exportExl\",\"type\":2}', '127.0.0.1', '2017-11-19 20:16:10');
+INSERT INTO `sys_log` VALUES ('16', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-th-list\",\"menuId\":31,\"name\":\"订单管理\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:order:list\",\"type\":1,\"url\":\"sys/order.html\"}', '127.0.0.1', '2017-11-19 22:49:36');
+INSERT INTO `sys_log` VALUES ('17', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-cog\",\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-19 22:52:42');
+INSERT INTO `sys_log` VALUES ('18', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-19 22:55:58');
+INSERT INTO `sys_log` VALUES ('19', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-20 20:06:08');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -72,7 +86,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -94,6 +108,10 @@ INSERT INTO `sys_menu` VALUES ('24', '4', '新增', null, 'sys:menu:save,sys:men
 INSERT INTO `sys_menu` VALUES ('25', '4', '修改', null, 'sys:menu:update,sys:menu:select', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('26', '4', '删除', null, 'sys:menu:delete', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('28', '1', '代码生成器', 'sys/generator.html', 'sys:generator:list,sys:generator:code', '1', 'fa fa-rocket', '8');
+INSERT INTO `sys_menu` VALUES ('30', '0', '意见反馈管理', 'sys/feedback.html', 'sys:feedback:list,sys:feedback:info,sys:feedback:save,sys:feedback:update,sys:feedback:delete', '1', 'fa fa-pencil-square', '1');
+INSERT INTO `sys_menu` VALUES ('31', '0', '订单管理', 'sys/order.html', 'sys:order:list', '1', 'fa fa-th-list', '7');
+INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:exportExl', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -181,6 +199,72 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_feedback`;
+CREATE TABLE `tb_feedback` (
+  `feedback_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '意见反馈id',
+  `user_id` bigint(50) NOT NULL COMMENT '用户id',
+  `mobile` varchar(20) NOT NULL COMMENT '联系电话',
+  `identity` bigint(5) DEFAULT NULL COMMENT '身份:0客户、1代理商、2补货员',
+  `feedback_content` varchar(1500) DEFAULT NULL COMMENT '反馈内容',
+  `reply_type` bigint(5) DEFAULT NULL COMMENT '回复状态 0未回复、1已回复',
+  `reply_content` varchar(1500) DEFAULT NULL COMMENT '回复内容',
+  `create_time` datetime DEFAULT NULL COMMENT '反馈时间',
+  PRIMARY KEY (`feedback_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='意见反馈表';
+
+-- ----------------------------
+-- Records of tb_feedback
+-- ----------------------------
+INSERT INTO `tb_feedback` VALUES ('2', '1', '138111111', '0', '你好', '1', 'ss', '2017-11-19 10:33:47');
+INSERT INTO `tb_feedback` VALUES ('3', '2', '132', '1', '你好', '1', '你你wwwwww', '2017-11-29 14:02:55');
+
+-- ----------------------------
+-- Table structure for tb_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_order`;
+CREATE TABLE `tb_order` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `order_id` bigint(50) NOT NULL COMMENT '订单号',
+  `user_id` bigint(50) NOT NULL COMMENT '购买人ID',
+  `product_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `product_num` bigint(50) DEFAULT '0' COMMENT '商品数量',
+  `order_price` bigint(50) DEFAULT '0' COMMENT '订单金额',
+  `machine_num` bigint(50) DEFAULT NULL COMMENT '售卖机器编号',
+  `pay_type` bigint(5) DEFAULT NULL COMMENT '支付方式 0微信支付、1支付宝支付',
+  `create_time` datetime DEFAULT NULL COMMENT '购买时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='订单表';
+
+-- ----------------------------
+-- Records of tb_order
+-- ----------------------------
+INSERT INTO `tb_order` VALUES ('1', '11', '111', '111', '2', '2', '2', '0', '2017-11-21 17:23:31');
+INSERT INTO `tb_order` VALUES ('2', '22', '222', '222', '1', '34', '3', '0', '2017-11-07 17:23:49');
+
+-- ----------------------------
+-- Table structure for tb_report
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_report`;
+CREATE TABLE `tb_report` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `report_num` bigint(50) NOT NULL COMMENT '报修单号',
+  `machine_num` bigint(50) NOT NULL COMMENT '报修机器编号',
+  `reporter_name` varchar(100) NOT NULL COMMENT '报修人名称',
+  `reporter_type` bigint(5) DEFAULT '0' COMMENT '报修人类型 0客户、1代理商、2补货员',
+  `repair_content` varchar(500) DEFAULT NULL,
+  `report_content` varchar(500) DEFAULT '0' COMMENT '报修备注',
+  `create_time` datetime DEFAULT NULL COMMENT '购买时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
+
+-- ----------------------------
+-- Records of tb_report
+-- ----------------------------
+INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '0', null, '坏了', '2017-11-19 23:27:57');
 
 -- ----------------------------
 -- Table structure for tb_token
