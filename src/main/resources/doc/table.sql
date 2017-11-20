@@ -40,3 +40,18 @@ CREATE TABLE `tb_report` (
   `create_time` datetime DEFAULT NULL COMMENT '购买时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
+
+#补货管理表
+CREATE TABLE `tb_replenishment` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `replenishment_num` bigint(50) NOT NULL COMMENT '补货单号',
+  `machine_num` bigint(50) NOT NULL COMMENT '补货机器编号',
+  `product_name` varchar(100) NOT NULL COMMENT '补货商品',
+  `product_num` varchar(100) DEFAULT '0' COMMENT '补充数量',
+  `apply_name` varchar(100) DEFAULT NULL COMMENT '申请人',
+  `reporter_identity` varchar(100) DEFAULT NULL COMMENT '申请人身份',
+  `apply_type` varchar(100) DEFAULT NULL COMMENT '补充状态',
+  `replenishment_name` varchar(100) NOT NULL COMMENT '补货商品',
+  `create_time` datetime DEFAULT NULL COMMENT '申请时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
