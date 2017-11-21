@@ -29,11 +29,41 @@ public class ReportEntity implements Serializable {
 	private String reportContent;
 	//维修反馈信息
 	private String repairContent;
+	
+	//机器所属经销商
+	private String machineDealer;
+	
+	//机器所属雇员
+	private String machineClerk;
+	
+	//机器所在地址
+	private String machineAddr;
+	
+	
+	public String getMachineAddr() {
+		return machineAddr;
+	}
+	public void setMachineAddr(String machineAddr) {
+		this.machineAddr = machineAddr;
+	}
 	//购买时间
 	private Date createTime;
 
 	
 	
+	
+	public String getMachineDealer() {
+		return machineDealer;
+	}
+	public void setMachineDealer(String machineDealer) {
+		this.machineDealer = machineDealer;
+	}
+	public String getMachineClerk() {
+		return machineClerk;
+	}
+	public void setMachineClerk(String machineClerk) {
+		this.machineClerk = machineClerk;
+	}
 	public String getReporterType() {
 		return reporterType;
 	}

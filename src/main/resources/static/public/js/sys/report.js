@@ -9,7 +9,10 @@ $(function () {
 			{ label: '报修人身份', name: 'reporterType', index: 'reporter_type',sortable: false, width: 80}, 			
 			{ label: '报修备注', name: 'reportContent', index: 'report_content', sortable: false,width: 80 }, 
 			{ label: '维修反馈信息', name: 'repairContent', index: 'repair_content', sortable: false,width: 80 ,hidden: true}, 			
-			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 }	,
+			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 },
+			{ label: '机器所属经销商', name: 'machineDealer', index: 'machine_dealer', sortable: false,width: 80 ,hidden: false}, 
+			{ label: '机器所属补货员', name: 'machineClerk', index: 'machine_clerk', sortable: false,width: 80 ,hidden: false}, 
+			{ label: '机器所在地址', name: 'machineAddr', index: 'machine_addr', sortable: false,width: 80 ,hidden: false}, 
 			{ label: '操作', name: 'id', index: 'id', sortable: false,width: 80 ,formatter:
 				function (value, grid, rows, state) {
 					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReportInfo(" + value + ")\">操作</a>"	

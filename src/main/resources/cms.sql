@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50622
+Source Server         : mysql1
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : cms
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-20 23:30:26
+Date: 2017-11-21 15:04:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -285,13 +285,16 @@ CREATE TABLE `tb_report` (
   `repair_content` varchar(500) DEFAULT NULL,
   `report_content` varchar(500) DEFAULT '0' COMMENT '报修备注',
   `create_time` datetime DEFAULT NULL COMMENT '购买时间',
+  `machine_dealer` varchar(100) DEFAULT NULL,
+  `machine_addr` varchar(500) DEFAULT NULL,
+  `machine_clerk` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
 
 -- ----------------------------
 -- Records of tb_report
 -- ----------------------------
-INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '经销商', null, '坏了', '2017-11-19 23:27:57');
+INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '经销商', null, '坏了', '2017-11-19 23:27:57', '小王', '大兴区西红门', '小李');
 
 -- ----------------------------
 -- Table structure for tb_token

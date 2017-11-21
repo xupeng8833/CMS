@@ -12,6 +12,9 @@
         <result property="reporterType" column="reporter_type"/>
         <result property="repairContent" column="repair_content"/>
         <result property="reportContent" column="report_content"/>
+        <result property="machineDealer" column="machine_dealer"/>
+        <result property="machineClerk" column="machine_clerk"/>
+        <result property="machineAddr" column="machine_addr"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
@@ -58,6 +61,9 @@
 			`reporter_type`, 
 			`repair_content`, 
 			`report_content`, 
+			`machine_dealer`, 
+			`machine_clerk`, 
+			`machine_addr`, 
 			`create_time`
 		)
 		values
@@ -67,7 +73,10 @@
 			#{reporterName}, 
 			#{reporterType}, 
 			#{repairContent}, 
-			#{reportContent}, 
+			#{reportContent},
+			#{machineDealer}, 
+			#{machineClerk}, 
+			#{machineAddr}, 
 			#{createTime}
 		)
 	</insert>
@@ -81,6 +90,9 @@
 			<if test="reporterType != null">`reporter_type` = #{reporterType}, </if>
 			<if test="repairContent != null">`repair_content` = #{repairContent}, </if>
 			<if test="reportContent != null">`report_content` = #{reportContent}, </if>
+			<if test="machineDealer != null">`machine_dealer` = #{machineDealer}, </if>
+			<if test="machineClerk != null">`machine_clerk` = #{machineClerk}, </if>
+			<if test="machineAddr != null">`machine_addr` = #{machineAddr}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}</if>
 		</set>
 		where id = #{id}
