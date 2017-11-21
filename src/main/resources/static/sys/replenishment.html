@@ -17,15 +17,36 @@
 <script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
 <script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
 <script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../public/plugins/laydate/laydate.js"></script>
 <script src="../public/js/common.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			<a v-if="hasPermission('sys:replenishment:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			<a v-if="hasPermission('sys:replenishment:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			<a v-if="hasPermission('sys:replenishment:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.replenishmentNum" @keyup.enter="query" placeholder="补货单号">
+			</div>
+			
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.machineNum" @keyup.enter="query" placeholder="机器编号">
+			</div>
+			
+			<div class="form-group col-sm-1">
+				<input type="text" class="form-control" v-model="q.applyName" @keyup.enter="query" placeholder="补货申请人">
+			</div>
+			
+			<div class="form-group col-sm-1" style="width: 60px;margin-left:10px;padding-right:0px;margin-bottom: 0px;margin-top: 8px;">时间：</div>
+			<div class="form-group col-xs-2">
+				<input type="text" class="benginTime form-control" id="benginTime" v-model="q.benginTime" @keyup.enter="query" placeholder="开始时间">
+			</div>
+			
+			<div class="form-group col-xs-2">
+				<input type="text" class="form-control" id="endTime" v-model="q.endTime" @keyup.enter="query" placeholder="结束时间">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+		
+			<a v-if="hasPermission('sys:replenishment:update')" v-show="false" id="getReplenishmentInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 		</div>
 	    <table id="jqGrid"></table>
 	    <div id="jqGridPager"></div>
@@ -34,64 +55,86 @@
     <div v-show="!showList" class="panel panel-default">
 		<div class="panel-heading">{{title}}</div>
 		<form class="form-horizontal">
-											<div class="form-group">
-			   	<div class="col-sm-2 control-label">补货单号</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.replenishmentNum" placeholder="补货单号"/>
+		
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补充状态:</div>
+			    
+			     <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.applyType">{{replenishment.applyType}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">补货机器编号</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.machineNum" placeholder="补货机器编号"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补货申请时间:</div>
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.createTime">{{replenishment.createTime}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">补货商品</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.productName" placeholder="补货商品"/>
+		
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补货机器:</div>
+			      <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.machineNum">{{replenishment.machineNum}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">补充数量</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.productNum" placeholder="补充数量"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">报修机器地址:</div>
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.machineAddr">{{replenishment.machineAddr}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">申请人</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.applyName" placeholder="申请人"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">申请人:</div>
+			    
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.applyName">{{replenishment.applyName}}</span>
+			      <span v-model="replenishment.reporterIdentity">({{replenishment.reporterIdentity}})</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">申请人身份</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.reporterIdentity" placeholder="申请人身份"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补货商品:</div>
+			     <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.productName">{{replenishment.productName}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">补充状态</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.applyType" placeholder="补充状态"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补充数量:</div>
+			      <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.productNum">{{replenishment.productNum}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">补货商品</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.replenishmentName" placeholder="补货商品"/>
+			
+				<div class="form-group">
+			   	<div class="col-sm-2 control-label">对应经销商:</div>
+			    
+		 		<div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.machineDealer">{{replenishment.machineDealer}}</span>
 			    </div>
 			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">申请时间</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="replenishment.createTime" placeholder="申请时间"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">对应补货员:</div>
+			    
+			    <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.machineClerk">{{replenishment.machineClerk}}</span>
 			    </div>
 			</div>
-							<div class="form-group">
-				<div class="col-sm-2 control-label"></div> 
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">补货人</div>
+			      <div class="col-sm-10" style="display:inline-block;position:relative;top:8px;">
+			      <span v-model="replenishment.replenishmentName">{{replenishment.replenishmentName}}</span>
+			    </div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
 			</div>
 		</form>
 	</div>

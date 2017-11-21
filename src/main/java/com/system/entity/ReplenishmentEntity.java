@@ -31,11 +31,40 @@ public class ReplenishmentEntity implements Serializable {
 	private String reporterIdentity;
 	//补充状态
 	private String applyType;
-	//补货商品
+	//补货人名称
 	private String replenishmentName;
 	//申请时间
 	private Date createTime;
+	
+	//机器所属经销商
+	private String machineDealer;
+	
+	//机器所属雇员
+	private String machineClerk;
+	
+	//机器所在地址
+	private String machineAddr;
+	
+	
 
+	public String getMachineDealer() {
+		return machineDealer;
+	}
+	public void setMachineDealer(String machineDealer) {
+		this.machineDealer = machineDealer;
+	}
+	public String getMachineClerk() {
+		return machineClerk;
+	}
+	public void setMachineClerk(String machineClerk) {
+		this.machineClerk = machineClerk;
+	}
+	public String getMachineAddr() {
+		return machineAddr;
+	}
+	public void setMachineAddr(String machineAddr) {
+		this.machineAddr = machineAddr;
+	}
 	/**
 	 * 设置：主键
 	 */

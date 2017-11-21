@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-21 15:04:21
+Date: 2017-11-21 17:09:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -261,7 +261,10 @@ CREATE TABLE `tb_replenishment` (
   `apply_name` varchar(100) DEFAULT NULL COMMENT '申请人',
   `reporter_identity` varchar(100) DEFAULT '0' COMMENT '申请人身份',
   `apply_type` varchar(100) DEFAULT NULL COMMENT '补充状态',
+  `machine_dealer` varchar(100) DEFAULT NULL,
+  `machine_addr` varchar(500) DEFAULT NULL,
   `replenishment_name` varchar(100) NOT NULL COMMENT '补货商品',
+  `machine_clerk` varchar(100) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
@@ -269,8 +272,8 @@ CREATE TABLE `tb_replenishment` (
 -- ----------------------------
 -- Records of tb_replenishment
 -- ----------------------------
-INSERT INTO `tb_replenishment` VALUES ('1', '1', '1', '1', '2', '2', '2', '2', '2', '2017-11-21 23:29:42');
-INSERT INTO `tb_replenishment` VALUES ('2', '2', '2', '2', '2', '2', '2', '2', '2', '2017-11-21 23:29:54');
+INSERT INTO `tb_replenishment` VALUES ('1', '11111111', '211111', '补货商品', '222', '申请人-王', '经销商', '已处理', '经销商-小王', '花家地', '补货员小王', '小王', '2017-11-21 23:29:42');
+INSERT INTO `tb_replenishment` VALUES ('2', '22222222', '3111111', '补货商品', '333', '申请人-李', '补货员', '待处理', '经销商-小明', '美院', '补货员小李', '小李', '2017-11-21 23:29:54');
 
 -- ----------------------------
 -- Table structure for tb_report

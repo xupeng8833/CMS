@@ -14,6 +14,9 @@
         <result property="reporterIdentity" column="reporter_identity"/>
         <result property="applyType" column="apply_type"/>
         <result property="replenishmentName" column="replenishment_name"/>
+        <result property="machineDealer" column="machine_dealer"/>
+        <result property="machineClerk" column="machine_clerk"/>
+        <result property="machineAddr" column="machine_addr"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
@@ -23,14 +26,25 @@
 
 	<select id="queryList" resultType="com.system.entity.ReplenishmentEntity">
 		select * from tb_replenishment
-        <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
-            </when>
-			<otherwise>
-                order by id desc
-			</otherwise>
-        </choose>
+        <where>
+			<if test="replenishmentNum != null and replenishmentNum.trim() != ''">
+				and replenishment_num like concat('%', #{replenishmentNum}, '%') 
+			</if>
+			<if test="applyName != null and applyName.trim() != ''">
+				and apply_name like concat('%', #{applyName}, '%') 
+			</if>
+			<if test="machineNum != null and machineNum.trim() != ''">
+				and machine_num like concat('%', #{machineNum}, '%') 
+			</if>
+			<!-- 时间范围查询 -->
+			<if test="benginTime != null and benginTime.trim() != ''">
+    			AND create_time &gt;#{benginTime,jdbcType=TIMESTAMP} 
+    		</if> 
+    		<if test="endTime != null and endTime.trim() != ''">
+    			AND create_time &lt;#{endTime,jdbcType=TIMESTAMP}
+    		</if>
+		</where>
+		order by id desc 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -51,6 +65,9 @@
 			`reporter_identity`, 
 			`apply_type`, 
 			`replenishment_name`, 
+			`machine_dealer`, 
+			`machine_clerk`, 
+			`machine_addr`, 
 			`create_time`
 		)
 		values
@@ -62,7 +79,10 @@
 			#{applyName}, 
 			#{reporterIdentity}, 
 			#{applyType}, 
-			#{replenishmentName}, 
+			#{replenishmentName},
+			#{machineDealer}, 
+			#{machineClerk}, 
+			#{machineAddr}, 
 			#{createTime}
 		)
 	</insert>
@@ -78,6 +98,9 @@
 			<if test="reporterIdentity != null">`reporter_identity` = #{reporterIdentity}, </if>
 			<if test="applyType != null">`apply_type` = #{applyType}, </if>
 			<if test="replenishmentName != null">`replenishment_name` = #{replenishmentName}, </if>
+			<if test="machineDealer != null">`machine_dealer` = #{machineDealer}, </if>
+			<if test="machineClerk != null">`machine_clerk` = #{machineClerk}, </if>
+			<if test="machineAddr != null">`machine_addr` = #{machineAddr}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}</if>
 		</set>
 		where id = #{id}
