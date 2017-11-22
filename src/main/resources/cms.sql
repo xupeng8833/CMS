@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-21 17:09:35
+Date: 2017-11-22 16:45:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -73,6 +73,8 @@ INSERT INTO `sys_log` VALUES ('18', 'admin', '修改菜单', 'com.system.control
 INSERT INTO `sys_log` VALUES ('19', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-20 20:06:08');
 INSERT INTO `sys_log` VALUES ('20', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"补货管理\",\"orderNum\":9,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:replenishment:list,sys:replenishment:update,sys:replenishment:info\",\"type\":1,\"url\":\"sys/replenishment.html\"}', '127.0.0.1', '2017-11-20 23:25:10');
 INSERT INTO `sys_log` VALUES ('21', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-file-text\",\"menuId\":34,\"name\":\"补货管理\",\"orderNum\":9,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:replenishment:list,sys:replenishment:update,sys:replenishment:info\",\"type\":1,\"url\":\"sys/replenishment.html\"}', '127.0.0.1', '2017-11-20 23:27:59');
+INSERT INTO `sys_log` VALUES ('22', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-credit-card\",\"name\":\"提现结算申请\",\"orderNum\":10,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update\",\"type\":1,\"url\":\"sys/presentapplication.html\"}', '127.0.0.1', '2017-11-22 09:42:57');
+INSERT INTO `sys_log` VALUES ('23', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,28,30,31,32],\"remark\":\"xxx\",\"roleName\":\"2\"}', '127.0.0.1', '2017-11-22 14:29:03');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -88,7 +90,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -115,6 +117,7 @@ INSERT INTO `sys_menu` VALUES ('31', '0', '订单管理', 'sys/order.html', 'sys
 INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:exportExl', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
 INSERT INTO `sys_menu` VALUES ('34', '0', '补货管理', 'sys/replenishment.html', 'sys:replenishment:list,sys:replenishment:update,sys:replenishment:info', '1', 'fa fa-file-text', '9');
+INSERT INTO `sys_menu` VALUES ('35', '0', '提现结算申请', 'sys/presentapplication.html', 'sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update', '1', 'fa fa-credit-card', '10');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -127,12 +130,13 @@ CREATE TABLE `sys_role` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'xp', 'x', '1', '2017-11-19 08:50:35');
+INSERT INTO `sys_role` VALUES ('2', '2', 'xxx', '1', '2017-11-22 14:29:03');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -143,7 +147,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -165,6 +169,26 @@ INSERT INTO `sys_role_menu` VALUES ('14', '1', '24');
 INSERT INTO `sys_role_menu` VALUES ('15', '1', '25');
 INSERT INTO `sys_role_menu` VALUES ('16', '1', '26');
 INSERT INTO `sys_role_menu` VALUES ('17', '1', '28');
+INSERT INTO `sys_role_menu` VALUES ('18', '2', '1');
+INSERT INTO `sys_role_menu` VALUES ('19', '2', '2');
+INSERT INTO `sys_role_menu` VALUES ('20', '2', '15');
+INSERT INTO `sys_role_menu` VALUES ('21', '2', '16');
+INSERT INTO `sys_role_menu` VALUES ('22', '2', '17');
+INSERT INTO `sys_role_menu` VALUES ('23', '2', '18');
+INSERT INTO `sys_role_menu` VALUES ('24', '2', '3');
+INSERT INTO `sys_role_menu` VALUES ('25', '2', '19');
+INSERT INTO `sys_role_menu` VALUES ('26', '2', '20');
+INSERT INTO `sys_role_menu` VALUES ('27', '2', '21');
+INSERT INTO `sys_role_menu` VALUES ('28', '2', '22');
+INSERT INTO `sys_role_menu` VALUES ('29', '2', '4');
+INSERT INTO `sys_role_menu` VALUES ('30', '2', '23');
+INSERT INTO `sys_role_menu` VALUES ('31', '2', '24');
+INSERT INTO `sys_role_menu` VALUES ('32', '2', '25');
+INSERT INTO `sys_role_menu` VALUES ('33', '2', '26');
+INSERT INTO `sys_role_menu` VALUES ('34', '2', '28');
+INSERT INTO `sys_role_menu` VALUES ('35', '2', '30');
+INSERT INTO `sys_role_menu` VALUES ('36', '2', '31');
+INSERT INTO `sys_role_menu` VALUES ('37', '2', '32');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -249,6 +273,30 @@ INSERT INTO `tb_order` VALUES ('1', '11', '111', '111', '2', '2', '2', '0', '201
 INSERT INTO `tb_order` VALUES ('2', '22', '222', '222', '1', '34', '3', '0', '2017-11-07 17:23:49');
 
 -- ----------------------------
+-- Table structure for tb_present_application
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_present_application`;
+CREATE TABLE `tb_present_application` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `application_num` bigint(50) NOT NULL COMMENT '提现流水单号',
+  `apply_name_num` bigint(50) NOT NULL COMMENT '提现用户ID',
+  `account_name` varchar(100) NOT NULL COMMENT '账号名称',
+  `mobile` varchar(50) DEFAULT '0' COMMENT '手机号',
+  `operator_name` varchar(100) DEFAULT NULL COMMENT '运营商名称',
+  `cash_available` decimal(15,2) DEFAULT '0.00' COMMENT '可提现金额',
+  `withdrawal_amount` decimal(15,2) DEFAULT '0.00' COMMENT '提现金额',
+  `audit_state` bigint(10) DEFAULT '0' COMMENT '处理状态 0代表未审核 1代表已审核',
+  `create_time` datetime DEFAULT NULL COMMENT '申请时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='提现结算申请表';
+
+-- ----------------------------
+-- Records of tb_present_application
+-- ----------------------------
+INSERT INTO `tb_present_application` VALUES ('1', '111', '222', '小王', '13811111', '北京市商贸', '1500.00', '1000.00', '0', '2017-11-28 09:50:10');
+INSERT INTO `tb_present_application` VALUES ('2', '222', '333', '小李', '135', '大兴', '1700.00', '1100.00', '1', '2017-11-29 11:00:04');
+
+-- ----------------------------
 -- Table structure for tb_replenishment
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_replenishment`;
@@ -267,13 +315,11 @@ CREATE TABLE `tb_replenishment` (
   `machine_clerk` varchar(100) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='补货申请';
 
 -- ----------------------------
 -- Records of tb_replenishment
 -- ----------------------------
-INSERT INTO `tb_replenishment` VALUES ('1', '11111111', '211111', '补货商品', '222', '申请人-王', '经销商', '已处理', '经销商-小王', '花家地', '补货员小王', '小王', '2017-11-21 23:29:42');
-INSERT INTO `tb_replenishment` VALUES ('2', '22222222', '3111111', '补货商品', '333', '申请人-李', '补货员', '待处理', '经销商-小明', '美院', '补货员小李', '小李', '2017-11-21 23:29:54');
 
 -- ----------------------------
 -- Table structure for tb_report

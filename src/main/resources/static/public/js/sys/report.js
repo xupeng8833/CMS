@@ -15,7 +15,7 @@ $(function () {
 			{ label: '机器所在地址', name: 'machineAddr', index: 'machine_addr', sortable: false,width: 80 ,hidden: true}, 
 			{ label: '操作', name: 'id', index: 'id', sortable: false,width: 80 ,formatter:
 				function (value, grid, rows, state) {
-					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReportInfo(" + value + ")\">操作</a>"	
+					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReportInfo(" + value + ")\">操作</a>";
 				}
 			}			
         ],

@@ -13,9 +13,9 @@ $(function () {
 			{ label: '支付方式 ', name: 'payType', index: 'pay_type',sortable: false, width: 80 ,formatter:
 				function (value, grid, rows, state) {
 				if(value === 0){
-					return "微信支付"	
+					return "微信支付";
 				}else if(value === 1){
-					return "支付宝支付"
+					return "支付宝支付";
 				}
 				
 			}}			

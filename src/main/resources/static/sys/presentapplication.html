@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>提现结算申请表</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../public/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../public/css/main.css">
+<script src="../public/libs/jquery.min.js"></script>
+<script src="../public/plugins/layer/layer.js"></script>
+<script src="../public/libs/bootstrap.min.js"></script>
+<script src="../public/libs/vue.min.js"></script>
+<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../public/plugins/laydate/laydate.js"></script>
+<script src="../public/js/common.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.applicationNum" @keyup.enter="query" placeholder="提现单号">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.applyNameNum" @keyup.enter="query" placeholder="提现用户ID">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.accountName" @keyup.enter="query" placeholder="账号名称">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.mobile" @keyup.enter="query" placeholder="手机号">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<select class="form-control" @keyup.enter="query" id="auditStateId">  
+        			<option v-for="item in items" v-bind:value="item.value">{{item.text}}</option>  
+    			</select>  
+			</div>
+			
+			
+			<div class="form-group col-sm-1" style="width: 60px;margin-left:10px;padding-right:0px;margin-bottom: 0px;margin-top: 8px;">时间：</div>
+			<div class="form-group col-xs-2">
+				<input type="text" class="benginTime form-control" id="benginTime" v-model="q.benginTime" @keyup.enter="query" placeholder="开始时间">
+			</div>
+			
+			<div class="form-group col-xs-2">
+				<input type="text" class="form-control" id="endTime" v-model="q.endTime" @keyup.enter="query" placeholder="结束时间">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+		
+			<a v-if="hasPermission('sys:presentapplication:update')" id="getApplicationInfo" v-show="false" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											<div class="form-group">
+			   	<div class="col-sm-2 control-label">提现流水单号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.applicationNum" placeholder="提现流水单号"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">提现用户ID</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.applyNameNum" placeholder="提现用户ID"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">账号名称</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.accountName" placeholder="账号名称"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">手机号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.mobile" placeholder="手机号"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">运营商名称</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.operatorName" placeholder="运营商名称"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">可提现金额</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.cashAvailable" placeholder="可提现金额"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">提现金额</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.withdrawalAmount" placeholder="提现金额"/>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">处理状态 0代表未审核 1代表已审核</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.replenishmentName" placeholder="处理状态 0代表未审核 1代表已审核"/>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">申请时间</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="presentApplication.createTime" placeholder="申请时间"/>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="../public/js/sys/presentapplication.js"></script>
+</body>
+</html>

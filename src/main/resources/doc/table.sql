@@ -55,3 +55,18 @@ CREATE TABLE `tb_replenishment` (
   `create_time` datetime DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';
+
+#提现结算申请表
+CREATE TABLE `tb_present_application` (
+  `id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `application_num` bigint(50) NOT NULL COMMENT '提现流水单号',
+  `apply_name_num` bigint(50) NOT NULL COMMENT '提现用户ID',
+  `account_name` varchar(100) NOT NULL COMMENT '账号名称',
+  `mobile` varchar(50) DEFAULT '0' COMMENT '手机号',
+  `operator_name` varchar(100) DEFAULT NULL COMMENT '运营商名称',
+  `cash_available` DECIMAL(15,2) DEFAULT 0 COMMENT '可提现金额',
+  `withdrawal_amount` DECIMAL(15,2) DEFAULT 0 COMMENT '提现金额',
+  `replenishment_name` bigint(10) DEFAULT 0 COMMENT '处理状态 0代表未审核 1代表已审核',
+  `create_time` datetime DEFAULT NULL COMMENT '申请时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='保修信息管理';

@@ -3,22 +3,22 @@ $(function () {
         url: '../sys/replenishment/list',
         datatype: "json",
         colModel: [			
-			{ label: '补货单号', name: 'replenishmentNum', index: 'replenishment_num', width: 80 }, 			
-			{ label: '补货机器编号', name: 'machineNum', index: 'machine_num', width: 80 }, 			
-			{ label: '补货商品', name: 'productName', index: 'product_name', width: 80 }, 			
-			{ label: '补充数量', name: 'productNum', index: 'product_num', width: 80 }, 			
-			{ label: '申请人', name: 'applyName', index: 'apply_name', width: 80 }, 			
-			{ label: '申请人身份', name: 'reporterIdentity', index: 'reporter_identity', width: 80 }, 			
-			{ label: '补充状态', name: 'applyType', index: 'apply_type', width: 80 }, 			
+			{ label: '补货单号', name: 'replenishmentNum', index: 'replenishment_num', width: 80, sortable: false }, 			
+			{ label: '补货机器编号', name: 'machineNum', index: 'machine_num', width: 80 , sortable: false}, 			
+			{ label: '补货商品', name: 'productName', index: 'product_name', width: 80 , sortable: false}, 			
+			{ label: '补充数量', name: 'productNum', index: 'product_num', width: 80 , sortable: false}, 			
+			{ label: '申请人', name: 'applyName', index: 'apply_name', width: 80, sortable: false }, 			
+			{ label: '申请人身份', name: 'reporterIdentity', index: 'reporter_identity', width: 80 , sortable: false}, 			
+			{ label: '补充状态', name: 'applyType', index: 'apply_type', width: 80 , sortable: false}, 			
 			{ label: '补货人名称', name: 'replenishmentName', index: 'replenishment_name', width: 80 ,hidden: true},
 			{ label: '机器所属经销商', name: 'machineDealer', index: 'machine_dealer', sortable: false,width: 80 ,hidden: true}, 
 			{ label: '机器所属补货员', name: 'machineClerk', index: 'machine_clerk', sortable: false,width: 80 ,hidden: true}, 
 			{ label: '机器所在地址', name: 'machineAddr', index: 'machine_addr', sortable: false,width: 80 ,hidden: true},
-			{ label: '申请时间', name: 'createTime', index: 'create_time', width: 80 },		
+			{ label: '申请时间', name: 'createTime', index: 'create_time', width: 80 , sortable: false},		
 			{ label: '操作', name: 'id', index: 'id', width: 50, key: true,formatter:
 				function (value, grid, rows, state) {
 					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReplenishmentInfo(" + value + ")\">操作</a>"	
-				} }			
+				} , sortable: false}			
         ],
 		viewrecords: true,
         height: 385,

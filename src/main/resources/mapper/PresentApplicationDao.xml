@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.PresentApplicationDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.PresentApplicationEntity" id="presentApplicationMap">
+        <result property="id" column="id"/>
+        <result property="applicationNum" column="application_num"/>
+        <result property="applyNameNum" column="apply_name_num"/>
+        <result property="accountName" column="account_name"/>
+        <result property="mobile" column="mobile"/>
+        <result property="operatorName" column="operator_name"/>
+        <result property="cashAvailable" column="cash_available"/>
+        <result property="withdrawalAmount" column="withdrawal_amount"/>
+        <result property="auditState" column="audit_state"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.PresentApplicationEntity">
+		select * from tb_present_application where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.PresentApplicationEntity">
+		select * from tb_present_application
+               <where>
+			<if test="applicationNum != null and applicationNum.trim() != ''">
+				and application_num like concat('%', #{applicationNum}, '%') 
+			</if>
+			<if test="mobile != null and mobile.trim() != ''">
+				and mobile like concat('%', #{mobile}, '%') 
+			</if>
+			<if test="applyNameNum != null and applyNameNum.trim() != ''">
+				and apply_name_num like concat('%', #{applyNameNum}, '%') 
+			</if>
+			<if test="accountName != null and accountName.trim() != ''">
+				and account_name like concat('%', #{accountName}, '%') 
+			</if>
+			
+			<if test="auditState != null and auditState.trim() != ''">
+				and audit_state = #{auditState}
+			</if>
+			
+			<!-- 时间范围查询 -->
+			<if test="benginTime != null and benginTime.trim() != ''">
+    			AND create_time &gt;#{benginTime,jdbcType=TIMESTAMP} 
+    		</if> 
+    		<if test="endTime != null and endTime.trim() != ''">
+    			AND create_time &lt;#{endTime,jdbcType=TIMESTAMP}
+    		</if>
+		</where>
+		
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_present_application 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.PresentApplicationEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_present_application
+		(
+			`application_num`, 
+			`apply_name_num`, 
+			`account_name`, 
+			`mobile`, 
+			`operator_name`, 
+			`cash_available`, 
+			`withdrawal_amount`, 
+			`audit_state`, 
+			`create_time`
+		)
+		values
+		(
+			#{applicationNum}, 
+			#{applyNameNum}, 
+			#{accountName}, 
+			#{mobile}, 
+			#{operatorName}, 
+			#{cashAvailable}, 
+			#{withdrawalAmount}, 
+			#{auditState}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.PresentApplicationEntity">
+		update tb_present_application 
+		<set>
+			<if test="applicationNum != null">`application_num` = #{applicationNum}, </if>
+			<if test="applyNameNum != null">`apply_name_num` = #{applyNameNum}, </if>
+			<if test="accountName != null">`account_name` = #{accountName}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="operatorName != null">`operator_name` = #{operatorName}, </if>
+			<if test="cashAvailable != null">`cash_available` = #{cashAvailable}, </if>
+			<if test="withdrawalAmount != null">`withdrawal_amount` = #{withdrawalAmount}, </if>
+			<if test="auditState != null">`audit_state` = #{auditState}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_present_application where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_present_application where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
