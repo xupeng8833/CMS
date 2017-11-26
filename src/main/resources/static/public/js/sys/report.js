@@ -12,16 +12,17 @@ $(function () {
 			{ label: '购买时间', name: 'createTime', index: 'create_time', sortable: false,width: 80 },
 			{ label: '机器所属经销商', name: 'machineDealer', index: 'machine_dealer', sortable: false,width: 80 ,hidden: true}, 
 			{ label: '机器所属补货员', name: 'machineClerk', index: 'machine_clerk', sortable: false,width: 80 ,hidden: true}, 
-			{ label: '机器所在地址', name: 'machineAddr', index: 'machine_addr', sortable: false,width: 80 ,hidden: true}, 
+			{ label: '机器所在地址', name: 'machineAddr', index: 'machine_addr', sortable: false,width: 80 ,hidden: true}/*, 
 			{ label: '操作', name: 'id', index: 'id', sortable: false,width: 80 ,formatter:
 				function (value, grid, rows, state) {
 					return "<a href=\"#\"  style=\"color:#337ab7;font-weight:700;text-decoration: none\"  onclick=\"getReportInfo(" + value + ")\">操作</a>";
 				}
-			}			
+			}*/			
         ],
 		viewrecords: true,
         height: 385,
         rowNum: 10,
+        multiselect: true,
 		rowList : [10,30,50],
         rownumWidth: 25, 
         autowidth:true,
@@ -61,12 +62,12 @@ laydate.render({
 
 //点击操作隐藏按钮的功能
 //调用回复按钮
-var reportId = null;
+/*var reportId = null;
 function getReportInfo(id){
 	reportId = id
     document.getElementById("getReportInfo").click(); 
 };
-
+*/
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
@@ -94,14 +95,14 @@ var vm = new Vue({
 			vm.report = {};
 		},
 		update: function (event) {
-			//var id = getSelectedRow();
-			if(reportId == null){
+			var id = getSelectedRow();
+			if(id == null){
 				return ;
 			}
 			vm.showList = false;
             vm.title = "报修详情";
             
-            vm.getInfo(reportId)
+            vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
 			var url = vm.report.id == null ? "../sys/report/save" : "../sys/report/update";

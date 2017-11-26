@@ -148,6 +148,9 @@ var vm = new Vue({
 			//加载菜单树
 			$.get("../sys/menu/perms", function(r){
 				ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
+				
+//				var fatherNode = {menu_id:1,name:"全选",parent_id:0,open:true}
+//				ztree.addNodes(null,0,fatherNode)
 				//展开所有节点
 				ztree.expandAll(true);
 				

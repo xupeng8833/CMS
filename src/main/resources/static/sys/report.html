@@ -24,29 +24,30 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-				<div class="form-group col-sm-2">
+			<div class="form-group col-sm-1">
 				<input type="text" class="form-control" v-model="q.reportNum" @keyup.enter="query" placeholder="报修单号">
 			</div>
 			
-			<div class="form-group col-sm-2">
+			<div class="form-group col-sm-1">
 				<input type="text" class="form-control" v-model="q.machineNum" @keyup.enter="query" placeholder="机器编号">
 			</div>
 			
-			<div class="form-group col-sm-2">
+			<div class="form-group col-sm-1">
 				<input type="text" class="form-control" v-model="q.reporterName" @keyup.enter="query" placeholder="报修人">
 			</div>
 			
 			<div class="form-group col-sm-1" style="width: 60px;margin-left:10px;padding-right:0px;margin-bottom: 0px;margin-top: 8px;">时间：</div>
 			<div class="form-group col-xs-2">
-				<input type="text" class="benginTime form-control" id="benginTime" v-model="q.benginTime" @keyup.enter="query" placeholder="开始时间">
+				<input type="text" class="form-control" id="benginTime" v-model="q.benginTime" @keyup.enter="query" placeholder="开始时间">
 			</div>
 			
 			<div class="form-group col-xs-2">
 				<input type="text" class="form-control" id="endTime" v-model="q.endTime" @keyup.enter="query" placeholder="结束时间">
 			</div>
+			
 			<a class="btn btn-default" @click="query">查询</a>
 			
-			<a v-if="hasPermission('sys:report:update')" v-show="false" id="getReportInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('sys:report:update')" v-show="true" id="getReportInfo" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 
 		</div>
 	    <table id="jqGrid"></table>
