@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50622
+Source Server         : mysql1
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : cms
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-26 21:54:39
+Date: 2017-11-28 09:29:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,6 +32,7 @@ CREATE TABLE `sys_config` (
 -- ----------------------------
 -- Records of sys_config
 -- ----------------------------
+INSERT INTO `sys_config` VALUES ('1', 'CLOUD_STORAGE_CONFIG_KEY', '{\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"aliyunDomain\":\"\",\"aliyunEndPoint\":\"\",\"aliyunPrefix\":\"\",\"qcloudBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuBucketName\":\"ios-app\",\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"type\":1}', '0', '云存储配置信息');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -46,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -74,40 +75,7 @@ INSERT INTO `sys_log` VALUES ('20', 'admin', '保存菜单', 'com.system.control
 INSERT INTO `sys_log` VALUES ('21', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-file-text\",\"menuId\":34,\"name\":\"补货管理\",\"orderNum\":9,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:replenishment:list,sys:replenishment:update,sys:replenishment:info\",\"type\":1,\"url\":\"sys/replenishment.html\"}', '127.0.0.1', '2017-11-20 23:27:59');
 INSERT INTO `sys_log` VALUES ('22', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-credit-card\",\"name\":\"提现结算申请\",\"orderNum\":10,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update\",\"type\":1,\"url\":\"sys/presentapplication.html\"}', '127.0.0.1', '2017-11-22 09:42:57');
 INSERT INTO `sys_log` VALUES ('23', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,28,30,31,32],\"remark\":\"xxx\",\"roleName\":\"2\"}', '127.0.0.1', '2017-11-22 14:29:03');
-INSERT INTO `sys_log` VALUES ('24', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":1,\"name\":\"角色管理\",\"orderNum\":0,\"parentId\":0,\"parentName\":\"一级菜单\",\"type\":0}', '127.0.0.1', '2017-11-22 20:42:53');
-INSERT INTO `sys_log` VALUES ('25', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-eye-slash\",\"name\":\"角色管理-new\",\"orderNum\":3,\"parentId\":1,\"parentName\":\"角色管理\",\"perms\":\"sys:role:list,sys:role:info,sys:role:save,sys:menu:perms,sys:role:update,sys:menu:perms,sys:role:delete\",\"type\":1,\"url\":\"sys/newRole.html\"}', '127.0.0.1', '2017-11-22 20:47:07');
-INSERT INTO `sys_log` VALUES ('26', 'admin', '删除角色', 'com.system.controller.SysRoleController.delete()', '[1]', '127.0.0.1', '2017-11-22 20:48:23');
-INSERT INTO `sys_log` VALUES ('27', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[],\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 20:48:38');
-INSERT INTO `sys_log` VALUES ('28', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511354918000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,28],\"roleId\":3,\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 20:48:44');
-INSERT INTO `sys_log` VALUES ('29', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511354918000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,28],\"remark\":\"库管\",\"roleId\":3,\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 20:48:55');
-INSERT INTO `sys_log` VALUES ('30', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511354918000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,28,30,31,32,33,34,35],\"remark\":\"库管\",\"roleId\":3,\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 20:49:03');
-INSERT INTO `sys_log` VALUES ('31', 'admin', '删除角色', 'com.system.controller.SysRoleController.delete()', '[2]', '127.0.0.1', '2017-11-22 21:05:05');
-INSERT INTO `sys_log` VALUES ('32', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511354918000,\"createUserId\":1,\"menuIdList\":[1,3,19,20,21,22,28,31,32],\"remark\":\"库管\",\"roleId\":3,\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 21:56:59');
-INSERT INTO `sys_log` VALUES ('33', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511354918000,\"createUserId\":1,\"menuIdList\":[1,2,16,17,3,19,20,21,22,28,31,32],\"remark\":\"库管\",\"roleId\":3,\"roleName\":\"仓库库管\"}', '127.0.0.1', '2017-11-22 21:58:27');
-INSERT INTO `sys_log` VALUES ('34', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,28,33],\"remark\":\"xxxx\",\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:01:27');
-INSERT INTO `sys_log` VALUES ('35', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:01:43');
-INSERT INTO `sys_log` VALUES ('36', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:01:48');
-INSERT INTO `sys_log` VALUES ('37', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:01:54');
-INSERT INTO `sys_log` VALUES ('38', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:01:58');
-INSERT INTO `sys_log` VALUES ('39', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:02:03');
-INSERT INTO `sys_log` VALUES ('40', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,3,19,20,21,22,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-22 22:02:10');
-INSERT INTO `sys_log` VALUES ('41', 'admin', '保存用户', 'com.system.controller.SysUserController.save()', '{\"email\":\"962270789\",\"mobile\":\"1380000\",\"roleIdList\":[4],\"status\":1,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-26 10:16:43');
-INSERT INTO `sys_log` VALUES ('42', 'admin', '保存用户', 'com.system.controller.SysUserController.save()', '{\"email\":\"962270789@qq.com\",\"mobile\":\"1380000\",\"roleIdList\":[4],\"status\":1,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-26 10:16:51');
-INSERT INTO `sys_log` VALUES ('43', 'xupeng', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,3,19,20,21,22,4,23,24,25,26,36],\"remark\":\"你好\",\"roleName\":\"你好\"}', '127.0.0.1', '2017-11-26 10:29:12');
-INSERT INTO `sys_log` VALUES ('44', 'admin', '修改角色', 'com.system.controller.SysRoleController.update()', '{\"createTime\":1511359287000,\"createUserId\":1,\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,36,33],\"remark\":\"xxxx\",\"roleId\":4,\"roleName\":\"徐鹏\"}', '127.0.0.1', '2017-11-26 10:29:59');
-INSERT INTO `sys_log` VALUES ('45', 'xupeng', '删除角色', 'com.system.controller.SysRoleController.delete()', '[5]', '127.0.0.1', '2017-11-26 10:31:02');
-INSERT INTO `sys_log` VALUES ('46', 'xupeng', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,24,25,26,23],\"remark\":\"苗楠\",\"roleName\":\"苗楠\"}', '127.0.0.1', '2017-11-26 10:33:56');
-INSERT INTO `sys_log` VALUES ('47', 'admin', '删除菜单', 'com.system.controller.SysMenuController.delete()', '[36]', '127.0.0.1', '2017-11-26 10:45:10');
-INSERT INTO `sys_log` VALUES ('48', 'admin', '修改用户', 'com.system.controller.SysUserController.update()', '{\"createTime\":1511662611000,\"createUserId\":1,\"email\":\"962270789@qq.com\",\"mobile\":\"1380000\",\"roleIdList\":[4],\"status\":0,\"userId\":2,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-26 14:15:30');
-INSERT INTO `sys_log` VALUES ('49', 'admin', '修改用户', 'com.system.controller.SysUserController.update()', '{\"createTime\":1511662611000,\"createUserId\":1,\"email\":\"962270789@qq.com\",\"mobile\":\"1380000\",\"roleIdList\":[4],\"status\":1,\"userId\":2,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-26 14:16:19');
-INSERT INTO `sys_log` VALUES ('50', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-26 17:17:23');
-INSERT INTO `sys_log` VALUES ('51', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:update,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-26 17:19:37');
-INSERT INTO `sys_log` VALUES ('52', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-cog\",\"menuId\":33,\"name\":\"保修信息管理\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:report:list,sys:report:info\",\"type\":1,\"url\":\"sys/report.html\"}', '127.0.0.1', '2017-11-26 17:24:14');
-INSERT INTO `sys_log` VALUES ('53', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"新建补货任务\",\"orderNum\":0,\"parentId\":34,\"parentName\":\"补货管理\",\"perms\":\"sys:report:update\",\"type\":2}', '127.0.0.1', '2017-11-26 17:25:15');
-INSERT INTO `sys_log` VALUES ('54', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":37,\"name\":\"新建补货任务\",\"orderNum\":0,\"parentId\":34,\"parentName\":\"补货管理\",\"perms\":\"sys:report:update\",\"type\":2}', '127.0.0.1', '2017-11-26 17:25:56');
-INSERT INTO `sys_log` VALUES ('55', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":37,\"name\":\"新建补货任务\",\"orderNum\":0,\"parentId\":34,\"parentName\":\"补货管理\",\"perms\":\"sys:report:update\",\"type\":2}', '127.0.0.1', '2017-11-26 17:27:02');
-INSERT INTO `sys_log` VALUES ('56', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":37,\"name\":\"新建补货任务\",\"orderNum\":0,\"parentId\":33,\"parentName\":\"保修信息管理\",\"perms\":\"sys:report:update\",\"type\":2}', '127.0.0.1', '2017-11-26 17:29:31');
-INSERT INTO `sys_log` VALUES ('57', 'admin', '修改用户', 'com.system.controller.SysUserController.update()', '{\"createTime\":1511662611000,\"createUserId\":1,\"email\":\"962270789@qq.com\",\"mobile\":\"1380000\",\"roleIdList\":[4],\"status\":1,\"userId\":2,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-26 20:46:40');
+INSERT INTO `sys_log` VALUES ('24', 'admin', '保存用户', 'com.system.controller.SysUserController.save()', '{\"email\":\"962270789@qq.com\",\"mobile\":\"13800000\",\"roleIdList\":[2,1],\"status\":1,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-27 10:40:09');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -123,12 +91,12 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '角色管理', null, null, '0', 'fa fa-cog', '0');
+INSERT INTO `sys_menu` VALUES ('1', '0', '权限管理', null, null, '0', 'fa fa-cog', '0');
 INSERT INTO `sys_menu` VALUES ('2', '1', '用户管理', 'sys/user.html', null, '1', 'fa fa-user', '1');
 INSERT INTO `sys_menu` VALUES ('3', '1', '角色管理', 'sys/role.html', null, '1', 'fa fa-user-secret', '2');
 INSERT INTO `sys_menu` VALUES ('4', '1', '菜单管理', 'sys/menu.html', null, '1', 'fa fa-th-list', '3');
@@ -148,10 +116,9 @@ INSERT INTO `sys_menu` VALUES ('28', '1', '代码生成器', 'sys/generator.html
 INSERT INTO `sys_menu` VALUES ('30', '0', '意见反馈管理', 'sys/feedback.html', 'sys:feedback:list,sys:feedback:info,sys:feedback:save,sys:feedback:update,sys:feedback:delete', '1', 'fa fa-pencil-square', '1');
 INSERT INTO `sys_menu` VALUES ('31', '0', '订单管理', 'sys/order.html', 'sys:order:list', '1', 'fa fa-th-list', '7');
 INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:exportExl', '2', null, '0');
-INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:info', '1', 'fa fa-cog', '8');
+INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
 INSERT INTO `sys_menu` VALUES ('34', '0', '补货管理', 'sys/replenishment.html', 'sys:replenishment:list,sys:replenishment:update,sys:replenishment:info', '1', 'fa fa-file-text', '9');
 INSERT INTO `sys_menu` VALUES ('35', '0', '提现结算申请', 'sys/presentapplication.html', 'sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update', '1', 'fa fa-credit-card', '10');
-INSERT INTO `sys_menu` VALUES ('37', '33', '新建补货任务', null, 'sys:report:update', '2', null, '0');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -164,14 +131,13 @@ CREATE TABLE `sys_role` (
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('3', '仓库库管', '库管', '1', '2017-11-22 20:48:38');
-INSERT INTO `sys_role` VALUES ('4', '徐鹏', 'xxxx', '1', '2017-11-22 22:01:27');
-INSERT INTO `sys_role` VALUES ('6', '苗楠', '苗楠', '2', '2017-11-26 10:33:56');
+INSERT INTO `sys_role` VALUES ('1', 'xp', 'x', '1', '2017-11-19 08:50:35');
+INSERT INTO `sys_role` VALUES ('2', '2', 'xxx', '1', '2017-11-22 14:29:03');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -182,56 +148,48 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('107', '3', '1');
-INSERT INTO `sys_role_menu` VALUES ('108', '3', '2');
-INSERT INTO `sys_role_menu` VALUES ('109', '3', '16');
-INSERT INTO `sys_role_menu` VALUES ('110', '3', '17');
-INSERT INTO `sys_role_menu` VALUES ('111', '3', '3');
-INSERT INTO `sys_role_menu` VALUES ('112', '3', '19');
-INSERT INTO `sys_role_menu` VALUES ('113', '3', '20');
-INSERT INTO `sys_role_menu` VALUES ('114', '3', '21');
-INSERT INTO `sys_role_menu` VALUES ('115', '3', '22');
-INSERT INTO `sys_role_menu` VALUES ('116', '3', '28');
-INSERT INTO `sys_role_menu` VALUES ('117', '3', '31');
-INSERT INTO `sys_role_menu` VALUES ('118', '3', '32');
-INSERT INTO `sys_role_menu` VALUES ('243', '4', '1');
-INSERT INTO `sys_role_menu` VALUES ('244', '4', '2');
-INSERT INTO `sys_role_menu` VALUES ('245', '4', '15');
-INSERT INTO `sys_role_menu` VALUES ('246', '4', '16');
-INSERT INTO `sys_role_menu` VALUES ('247', '4', '17');
-INSERT INTO `sys_role_menu` VALUES ('248', '4', '18');
-INSERT INTO `sys_role_menu` VALUES ('249', '4', '3');
-INSERT INTO `sys_role_menu` VALUES ('250', '4', '19');
-INSERT INTO `sys_role_menu` VALUES ('251', '4', '20');
-INSERT INTO `sys_role_menu` VALUES ('252', '4', '21');
-INSERT INTO `sys_role_menu` VALUES ('253', '4', '22');
-INSERT INTO `sys_role_menu` VALUES ('254', '4', '4');
-INSERT INTO `sys_role_menu` VALUES ('255', '4', '23');
-INSERT INTO `sys_role_menu` VALUES ('256', '4', '24');
-INSERT INTO `sys_role_menu` VALUES ('257', '4', '25');
-INSERT INTO `sys_role_menu` VALUES ('258', '4', '26');
-INSERT INTO `sys_role_menu` VALUES ('260', '4', '33');
-INSERT INTO `sys_role_menu` VALUES ('261', '6', '1');
-INSERT INTO `sys_role_menu` VALUES ('262', '6', '2');
-INSERT INTO `sys_role_menu` VALUES ('263', '6', '15');
-INSERT INTO `sys_role_menu` VALUES ('264', '6', '16');
-INSERT INTO `sys_role_menu` VALUES ('265', '6', '17');
-INSERT INTO `sys_role_menu` VALUES ('266', '6', '18');
-INSERT INTO `sys_role_menu` VALUES ('267', '6', '3');
-INSERT INTO `sys_role_menu` VALUES ('268', '6', '19');
-INSERT INTO `sys_role_menu` VALUES ('269', '6', '20');
-INSERT INTO `sys_role_menu` VALUES ('270', '6', '21');
-INSERT INTO `sys_role_menu` VALUES ('271', '6', '22');
-INSERT INTO `sys_role_menu` VALUES ('272', '6', '4');
-INSERT INTO `sys_role_menu` VALUES ('273', '6', '24');
-INSERT INTO `sys_role_menu` VALUES ('274', '6', '25');
-INSERT INTO `sys_role_menu` VALUES ('275', '6', '26');
-INSERT INTO `sys_role_menu` VALUES ('276', '6', '23');
+INSERT INTO `sys_role_menu` VALUES ('1', '1', '1');
+INSERT INTO `sys_role_menu` VALUES ('2', '1', '2');
+INSERT INTO `sys_role_menu` VALUES ('3', '1', '15');
+INSERT INTO `sys_role_menu` VALUES ('4', '1', '16');
+INSERT INTO `sys_role_menu` VALUES ('5', '1', '17');
+INSERT INTO `sys_role_menu` VALUES ('6', '1', '18');
+INSERT INTO `sys_role_menu` VALUES ('7', '1', '3');
+INSERT INTO `sys_role_menu` VALUES ('8', '1', '19');
+INSERT INTO `sys_role_menu` VALUES ('9', '1', '20');
+INSERT INTO `sys_role_menu` VALUES ('10', '1', '21');
+INSERT INTO `sys_role_menu` VALUES ('11', '1', '22');
+INSERT INTO `sys_role_menu` VALUES ('12', '1', '4');
+INSERT INTO `sys_role_menu` VALUES ('13', '1', '23');
+INSERT INTO `sys_role_menu` VALUES ('14', '1', '24');
+INSERT INTO `sys_role_menu` VALUES ('15', '1', '25');
+INSERT INTO `sys_role_menu` VALUES ('16', '1', '26');
+INSERT INTO `sys_role_menu` VALUES ('17', '1', '28');
+INSERT INTO `sys_role_menu` VALUES ('18', '2', '1');
+INSERT INTO `sys_role_menu` VALUES ('19', '2', '2');
+INSERT INTO `sys_role_menu` VALUES ('20', '2', '15');
+INSERT INTO `sys_role_menu` VALUES ('21', '2', '16');
+INSERT INTO `sys_role_menu` VALUES ('22', '2', '17');
+INSERT INTO `sys_role_menu` VALUES ('23', '2', '18');
+INSERT INTO `sys_role_menu` VALUES ('24', '2', '3');
+INSERT INTO `sys_role_menu` VALUES ('25', '2', '19');
+INSERT INTO `sys_role_menu` VALUES ('26', '2', '20');
+INSERT INTO `sys_role_menu` VALUES ('27', '2', '21');
+INSERT INTO `sys_role_menu` VALUES ('28', '2', '22');
+INSERT INTO `sys_role_menu` VALUES ('29', '2', '4');
+INSERT INTO `sys_role_menu` VALUES ('30', '2', '23');
+INSERT INTO `sys_role_menu` VALUES ('31', '2', '24');
+INSERT INTO `sys_role_menu` VALUES ('32', '2', '25');
+INSERT INTO `sys_role_menu` VALUES ('33', '2', '26');
+INSERT INTO `sys_role_menu` VALUES ('34', '2', '28');
+INSERT INTO `sys_role_menu` VALUES ('35', '2', '30');
+INSERT INTO `sys_role_menu` VALUES ('36', '2', '31');
+INSERT INTO `sys_role_menu` VALUES ('37', '2', '32');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -246,6 +204,20 @@ CREATE TABLE `sys_user` (
   `status` tinyint(4) DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `sex` bigint(5) DEFAULT '0' COMMENT '性别 0代表是男 1代表是女',
+  `ops_leader_name` varchar(50) DEFAULT NULL COMMENT '所属上级',
+  `ops_role_name` varchar(50) DEFAULT NULL COMMENT '所属部门',
+  `ops_management_area` varchar(100) DEFAULT NULL COMMENT '管理范围',
+  `ops_link_man` varchar(50) DEFAULT NULL COMMENT '联系人',
+  `ops_income_rule` varchar(50) DEFAULT NULL COMMENT '收益规则',
+  `ops_cooperation_policy` varchar(1500) DEFAULT NULL COMMENT '合作政策',
+  `ops_region` varchar(50) DEFAULT NULL COMMENT '大区',
+  `ops_province` varchar(50) DEFAULT NULL COMMENT '省',
+  `ops_city` varchar(50) DEFAULT NULL COMMENT '市',
+  `ops_storehouse` varchar(50) DEFAULT NULL COMMENT '仓库',
+  `ops_route` varchar(50) DEFAULT NULL COMMENT '路线',
+  `ops_function` varchar(50) DEFAULT NULL COMMENT '职能',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
@@ -253,8 +225,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '100@qq.com', '13666666666', '1', null, '2017-06-01 15:33:20');
-INSERT INTO `sys_user` VALUES ('2', 'xupeng', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '962270789@qq.com', '1380000', '1', '1', '2017-11-26 10:16:51');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '100@qq.com', '13666666666', '1', null, '2017-06-01 15:33:20', null, '0', null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('2', 'xupeng', 'e4ec377250dc0f384a0aeef1a8c86d059516426ba1e858671b6fac2cc0aa21e5', '962270789@qq.com', '13800000', '1', '1', '2017-11-27 10:40:10', null, '0', null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -265,12 +237,13 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('4', '2', '4');
+INSERT INTO `sys_user_role` VALUES ('1', '2', '2');
+INSERT INTO `sys_user_role` VALUES ('2', '2', '1');
 
 -- ----------------------------
 -- Table structure for tb_feedback
@@ -293,6 +266,233 @@ CREATE TABLE `tb_feedback` (
 -- ----------------------------
 INSERT INTO `tb_feedback` VALUES ('2', '1', '138111111', '0', '你好', '1', 'ss', '2017-11-19 10:33:47');
 INSERT INTO `tb_feedback` VALUES ('3', '2', '132', '1', '你好', '1', '你你wwwwww', '2017-11-29 14:02:55');
+
+-- ----------------------------
+-- Table structure for tb_ops_balance_details
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_balance_details`;
+CREATE TABLE `tb_ops_balance_details` (
+  `ops_platform_manager_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '负责人编号',
+  `ops_platform_manager_name` varchar(100) NOT NULL COMMENT '负责人姓名',
+  `ops_available_balance` decimal(15,2) DEFAULT '0.00' COMMENT '可用余额',
+  `ops_accumulated_income` decimal(15,2) DEFAULT '0.00' COMMENT '历史收益',
+  `ops_cumulative_transaction` decimal(15,2) DEFAULT '0.00' COMMENT '累计交易额',
+  `ops_other_amount` decimal(15,2) DEFAULT '0.00' COMMENT '其他金额',
+  `ops_region` varchar(50) DEFAULT NULL COMMENT '区域',
+  PRIMARY KEY (`ops_platform_manager_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='余额明细表';
+
+-- ----------------------------
+-- Records of tb_ops_balance_details
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_customer`;
+CREATE TABLE `tb_ops_customer` (
+  `ops_customer_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '终端用户id',
+  `ops_customer_name` varchar(100) NOT NULL COMMENT '用户姓名',
+  `ops_customer_account` varchar(100) NOT NULL COMMENT '用户账号',
+  `ops_mobile` varchar(20) NOT NULL COMMENT '手机号',
+  `ops_customer_password` varchar(300) DEFAULT NULL COMMENT '用户密码',
+  `ops_purchase_num` bigint(5) DEFAULT '0' COMMENT '购买次数',
+  `ops_integration_total` bigint(5) DEFAULT '0' COMMENT '积分总数',
+  `ops_free_packet_count` bigint(5) DEFAULT '0' COMMENT '剩余免费包数',
+  `ops_membership_level` bigint(5) DEFAULT '0' COMMENT '会员级别',
+  `ops_purchase_amount` decimal(15,2) DEFAULT '0.00' COMMENT '购买金额',
+  `ops_member_points` bigint(50) DEFAULT '0' COMMENT '会员积分',
+  `ops_customer_image` varchar(300) DEFAULT NULL COMMENT '用户头像',
+  `ops_customer_status` bigint(5) DEFAULT '1' COMMENT '用户状态 0代表无效 1代表有效',
+  `create_time` datetime DEFAULT NULL COMMENT '注册时间',
+  PRIMARY KEY (`ops_customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='终端用户表';
+
+-- ----------------------------
+-- Records of tb_ops_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_customer_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_customer_order`;
+CREATE TABLE `tb_ops_customer_order` (
+  `ops_customer_order_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '订单id',
+  `ops_product_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `ops_customer_id` bigint(50) NOT NULL COMMENT '用户id',
+  `ops_product_amount` decimal(15,2) DEFAULT NULL COMMENT '商品金额',
+  `ops_product_status` varchar(50) NOT NULL COMMENT '商品类型',
+  `ops_store_name` varchar(50) NOT NULL COMMENT '店名',
+  `ops_store_address` varchar(300) DEFAULT NULL COMMENT '商店地址',
+  `ops_desktop_machine_id` bigint(50) NOT NULL COMMENT '桌面机器编号',
+  `ops_transaction_mode` varchar(50) NOT NULL COMMENT '交易方式',
+  `ops_transaction_status` varchar(50) NOT NULL COMMENT '交易状态',
+  `ops_scene` varchar(50) NOT NULL COMMENT '场景',
+  `ops_domain` varchar(50) NOT NULL COMMENT '功能区',
+  `ops_type` varchar(50) NOT NULL COMMENT '类型',
+  `create_time` datetime DEFAULT NULL COMMENT '交易时间时间',
+  PRIMARY KEY (`ops_customer_order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户订单表';
+
+-- ----------------------------
+-- Records of tb_ops_customer_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_platform_revenue
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_platform_revenue`;
+CREATE TABLE `tb_ops_platform_revenue` (
+  `ops_platform_manager_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '负责人编号',
+  `ops_platform_manager_name` varchar(100) NOT NULL COMMENT '负责人姓名',
+  `ops_total_transaction_volume` decimal(15,2) DEFAULT '0.00' COMMENT '总交易金额',
+  `ops_split_sum` decimal(15,2) DEFAULT '0.00' COMMENT '分成金额',
+  `ops_subsidy_amount` decimal(15,2) DEFAULT '0.00' COMMENT '补贴金额',
+  `ops_advertising_amount` decimal(15,2) DEFAULT '0.00' COMMENT '广告金额',
+  `ops_other_amount` decimal(15,2) DEFAULT '0.00' COMMENT '其他金额',
+  PRIMARY KEY (`ops_platform_manager_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='平台收益表';
+
+-- ----------------------------
+-- Records of tb_ops_platform_revenue
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_replenishment_clerk
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_replenishment_clerk`;
+CREATE TABLE `tb_ops_replenishment_clerk` (
+  `ops_replenishment_clerk_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '补货员id',
+  `ops_replenishment_clerk_name` varchar(100) NOT NULL COMMENT '补货员用户名',
+  `ops_replenishment_clerk_sex` bigint(5) DEFAULT '0' COMMENT '补货员性别 0代表男 1代表女',
+  `mobile` varchar(20) NOT NULL COMMENT '手机号',
+  `ops_storehouse_name` varchar(50) NOT NULL COMMENT '仓库名称',
+  `ops_city_area` varchar(100) NOT NULL COMMENT '城市区域',
+  `ops_leader_name` varchar(100) DEFAULT NULL COMMENT '上级领导',
+  `ops_duties` varchar(50) NOT NULL COMMENT '工作职能',
+  `ops_management_times` bigint(50) NOT NULL COMMENT '管理次数',
+  `create_time` datetime DEFAULT NULL COMMENT '就职时间',
+  PRIMARY KEY (`ops_replenishment_clerk_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='补货员表';
+
+-- ----------------------------
+-- Records of tb_ops_replenishment_clerk
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_responsible_person
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_responsible_person`;
+CREATE TABLE `tb_ops_responsible_person` (
+  `ops_responsible_person_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '负责人id',
+  `ops_store_manager_id` bigint(50) NOT NULL COMMENT '店长id',
+  `ops_store_manager_name` varchar(100) NOT NULL COMMENT '店长姓名',
+  `ops_responsible_person_name` varchar(100) NOT NULL COMMENT '负责人姓名',
+  `ops_group_name` varchar(100) NOT NULL COMMENT '集团名称',
+  `ops_responsible_person_mobile` varchar(100) NOT NULL COMMENT '负责人电话',
+  `sex` bigint(5) DEFAULT '0' COMMENT '店长性别 0代表男 1代表女',
+  `mobile` varchar(20) NOT NULL COMMENT '店长手机号',
+  `ops_store_manager_position` varchar(50) NOT NULL COMMENT '职位',
+  `ops_longitude_and_latitude` varchar(100) NOT NULL COMMENT '经纬度',
+  `ops_store_address` varchar(100) DEFAULT NULL COMMENT '地址',
+  `ops_store_name` varchar(50) NOT NULL COMMENT '店名称',
+  `ops_management_mode` varchar(50) NOT NULL COMMENT '经营方式',
+  `ops_scene` varchar(50) NOT NULL COMMENT '场景',
+  `ops_domain` varchar(50) NOT NULL COMMENT '功能区',
+  `ops_type` varchar(50) NOT NULL COMMENT '类型',
+  `ops_allowance` varchar(50) NOT NULL COMMENT '补贴',
+  `ops_income_rule` varchar(50) NOT NULL COMMENT '收益规则',
+  `ops_product_price` decimal(15,2) DEFAULT NULL COMMENT '商品价格',
+  `ops_adsense` bigint(5) DEFAULT '0' COMMENT '是否赠送广告位 0代表不赠送 1代表赠送',
+  `ops_business_development` varchar(50) NOT NULL COMMENT 'DB名称',
+  `ops_business_mobile` varchar(20) NOT NULL COMMENT 'DB电话',
+  `ops_replenishment_clerk_id` bigint(50) NOT NULL COMMENT '补货员id',
+  `ops_replenishment_clerk_name` varchar(100) NOT NULL COMMENT '补货员用户名',
+  `ops_installation_personnel_name` varchar(100) NOT NULL COMMENT '安装人员姓名',
+  `ops_installation_personnel_mobile` varchar(20) NOT NULL COMMENT '安装人员电话',
+  `ops_linkman_name` varchar(100) NOT NULL COMMENT '联系人姓名',
+  `ops_linkman_mobile` varchar(20) NOT NULL COMMENT '联系人员电话',
+  `ops_warehouse_name` varchar(100) NOT NULL COMMENT '仓库名称',
+  `ops_point_route` varchar(100) NOT NULL COMMENT '点位路线',
+  `contract_time` datetime DEFAULT NULL COMMENT '签约时间',
+  `installation_time` datetime DEFAULT NULL COMMENT '安装时间',
+  `ops_desktop_advertising_status` bigint(5) DEFAULT '0' COMMENT '是否允许桌面广告 0允许 1不允许',
+  `ops_paper_advertising_status` bigint(5) DEFAULT '0' COMMENT '是否允许纸面广告 0允许 1不允许',
+  `ops_first_paper_feed` bigint(50) DEFAULT '0' COMMENT '首次送纸量',
+  `ops_ten_day_consumption` bigint(50) DEFAULT '0' COMMENT '10天耗质量',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`ops_responsible_person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='负责人表';
+
+-- ----------------------------
+-- Records of tb_ops_responsible_person
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_store_manager
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_store_manager`;
+CREATE TABLE `tb_ops_store_manager` (
+  `ops_store_manager_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '经销商id',
+  `ops_user_id` bigint(50) NOT NULL COMMENT '管理人id',
+  `ops_store_manager_name` varchar(100) NOT NULL COMMENT '店长姓名',
+  `sex` bigint(5) DEFAULT '0' COMMENT '店长性别 0代表男 1代表女',
+  `mobile` varchar(20) NOT NULL COMMENT '店长手机号',
+  `ops_store_manager_position` varchar(50) NOT NULL COMMENT '职位',
+  `ops_longitude_and_latitude` varchar(100) NOT NULL COMMENT '经纬度',
+  `ops_store_address` varchar(100) DEFAULT NULL COMMENT '地址',
+  `ops_store_name` varchar(50) NOT NULL COMMENT '店名称',
+  `ops_management_mode` varchar(50) NOT NULL COMMENT '经营方式',
+  `ops_scene` varchar(50) NOT NULL COMMENT '场景',
+  `ops_domain` varchar(50) NOT NULL COMMENT '功能区',
+  `ops_type` varchar(50) NOT NULL COMMENT '类型',
+  `ops_allowance` varchar(50) NOT NULL COMMENT '补贴',
+  `ops_income_rule` varchar(50) NOT NULL COMMENT '收益规则',
+  `ops_product_price` decimal(15,2) DEFAULT NULL COMMENT '商品价格',
+  `ops_adsense` bigint(5) DEFAULT '0' COMMENT '是否赠送广告位 0代表不赠送 1代表赠送',
+  `ops_business_development` varchar(50) NOT NULL COMMENT 'DB名称',
+  `ops_business_mobile` varchar(20) NOT NULL COMMENT 'DB电话',
+  `ops_replenishment_clerk_id` bigint(50) NOT NULL COMMENT '补货员id',
+  `ops_replenishment_clerk_name` varchar(100) NOT NULL COMMENT '补货员用户名',
+  `ops_installation_personnel_name` varchar(100) NOT NULL COMMENT '安装人员姓名',
+  `ops_installation_personnel_mobile` varchar(20) NOT NULL COMMENT '安装人员电话',
+  `ops_linkman_name` varchar(100) NOT NULL COMMENT '联系人姓名',
+  `ops_linkman_mobile` varchar(20) NOT NULL COMMENT '联系人员电话',
+  `ops_warehouse_name` varchar(100) NOT NULL COMMENT '仓库名称',
+  `ops_point_route` varchar(100) NOT NULL COMMENT '点位路线',
+  `contract_time` datetime DEFAULT NULL COMMENT '签约时间',
+  `installation_time` datetime DEFAULT NULL COMMENT '安装时间',
+  `ops_desktop_advertising_status` bigint(5) DEFAULT '0' COMMENT '是否允许桌面广告 0允许 1不允许',
+  `ops_paper_advertising_status` bigint(5) DEFAULT '0' COMMENT '是否允许纸面广告 0允许 1不允许',
+  `ops_first_paper_feed` bigint(50) DEFAULT '0' COMMENT '首次送纸量',
+  `ops_ten_day_consumption` bigint(50) DEFAULT '0' COMMENT '10天耗质量',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`ops_store_manager_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店长表';
+
+-- ----------------------------
+-- Records of tb_ops_store_manager
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_ops_transaction_records
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ops_transaction_records`;
+CREATE TABLE `tb_ops_transaction_records` (
+  `ops_order_id` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '订单号',
+  `ops_product_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `ops_product_price` decimal(15,2) DEFAULT '0.00' COMMENT '商品价格',
+  `ops_transaction_number` bigint(50) DEFAULT '0' COMMENT '交易单号',
+  `ops_region` varchar(50) DEFAULT NULL COMMENT '售卖区域',
+  `create_time` datetime DEFAULT NULL COMMENT '售卖时间',
+  `ops_machine_number` varchar(50) DEFAULT NULL COMMENT '售卖机器编号',
+  `ops_customer_account` varchar(50) DEFAULT NULL COMMENT '购买人账号',
+  PRIMARY KEY (`ops_order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易记录表';
+
+-- ----------------------------
+-- Records of tb_ops_transaction_records
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_order
@@ -360,12 +560,40 @@ CREATE TABLE `tb_replenishment` (
   `machine_clerk` varchar(100) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '申请时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='补货申请';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='补货申请';
 
 -- ----------------------------
 -- Records of tb_replenishment
 -- ----------------------------
-INSERT INTO `tb_replenishment` VALUES ('1', '2', '2', '2', '0', '2', '02', '2', '2', '2', '2', null, '2017-11-24 17:28:38');
+INSERT INTO `tb_replenishment` VALUES ('1', '1', '1', '11', '0', null, '0', null, null, null, '1', null, null);
+
+-- ----------------------------
+-- Table structure for tb_replenishment_manage
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_replenishment_manage`;
+CREATE TABLE `tb_replenishment_manage` (
+  `ops_replenishment_num` bigint(50) NOT NULL AUTO_INCREMENT COMMENT '补货单号',
+  `ops_store_manager_id` bigint(50) NOT NULL COMMENT '店长编号',
+  `ops_store_name` varchar(100) NOT NULL COMMENT '店名',
+  `ops_linkman_name` varchar(100) DEFAULT '0' COMMENT '联系人姓名',
+  `create_time` datetime DEFAULT NULL COMMENT '上次补货时间',
+  `ops_application_status` bigint(5) DEFAULT '0' COMMENT '是否有申请 0代表没有 1代表有',
+  `ops_last_amount_paper` bigint(50) DEFAULT '0' COMMENT '上次补纸量',
+  `ops_initial_paper_quantity` bigint(50) DEFAULT '0' COMMENT '期初纸量',
+  `ops_paper_yield` bigint(50) DEFAULT '0' COMMENT '当前出纸率',
+  `ops_paper_surplus` bigint(50) DEFAULT '0' COMMENT '剩余纸量',
+  `ops_paper_output` bigint(50) DEFAULT '0' COMMENT '单日出纸量',
+  `ops_replenishment_cycle` varchar(50) NOT NULL COMMENT '补货周期',
+  `ops_product_name` varchar(100) NOT NULL COMMENT '商品名称',
+  `ops_product_type` varchar(100) NOT NULL COMMENT '商品类型',
+  `ops_error_state` varchar(100) NOT NULL COMMENT '异常状态',
+  `ops_error_remark` varchar(100) NOT NULL COMMENT '异常备注',
+  PRIMARY KEY (`ops_replenishment_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='补货管理';
+
+-- ----------------------------
+-- Records of tb_replenishment_manage
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_report
@@ -389,7 +617,7 @@ CREATE TABLE `tb_report` (
 -- ----------------------------
 -- Records of tb_report
 -- ----------------------------
-INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '经销商', '12', '坏了', '2017-11-30 23:27:57', '小王', '大兴区西红门', '小李');
+INSERT INTO `tb_report` VALUES ('1', '2', '2', '你', '经销商', null, '坏了', '2017-11-19 23:27:57', '小王', '大兴区西红门', '小李');
 
 -- ----------------------------
 -- Table structure for tb_token
