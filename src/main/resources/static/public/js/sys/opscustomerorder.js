@@ -3,9 +3,9 @@ $(function () {
         url: '../opscustomerorder/list',
         datatype: "json",
         colModel: [			
-			{ label: 'opsCustomerOrderId', name: 'opsCustomerOrderId', index: 'ops_customer_order_id', width: 50, key: true },
+			{ label: '订单号', name: 'opsCustomerOrderId', index: 'ops_customer_order_id', width: 50, key: true },
 			{ label: '商品名称', name: 'opsProductName', index: 'ops_product_name', width: 80 }, 			
-			{ label: '用户id', name: 'opsCustomerId', index: 'ops_customer_id', width: 80 }, 			
+			{ label: '用户id', name: 'opsCustomerId', index: 'ops_customer_id', width: 80 ,hidden: true}, 			
 			{ label: '商品金额', name: 'opsProductAmount', index: 'ops_product_amount', width: 80 }, 			
 			{ label: '商品类型', name: 'opsProductStatus', index: 'ops_product_status', width: 80 }, 			
 			{ label: '店名', name: 'opsStoreName', index: 'ops_store_name', width: 80 }, 			
