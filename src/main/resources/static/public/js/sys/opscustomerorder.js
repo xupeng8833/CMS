@@ -1,4 +1,7 @@
 $(function () {
+	/*$.get("../public/js/data/province.json", function(data){
+		alert(data);
+	});*/
     $("#jqGrid").jqGrid({
         url: '../opscustomerorder/list',
         datatype: "json",
@@ -53,6 +56,9 @@ $(function () {
 function refundment(id){
 	alert(id);
 }
+
+
+
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
@@ -66,7 +72,14 @@ var vm = new Vue({
 		selected:'',
 		showList: true,
 		title: null,
-		opsCustomerOrder: {}
+		opsCustomerOrder: {},
+		
+		arr: '../public/js/data/province.json',
+		prov: '',
+		city: '',
+		district: '区',
+		cityArr: [],
+		districtArr: []
 	},
 	methods: {
 		query: function () {
@@ -107,29 +120,6 @@ var vm = new Vue({
 						alert(r.msg);
 					}
 				}
-			});
-		},
-		del: function (event) {
-			var opsCustomerOrderIds = getSelectedRows();
-			if(opsCustomerOrderIds == null){
-				return ;
-			}
-			
-			confirm('确定要删除选中的记录？', function(){
-				$.ajax({
-					type: "POST",
-				    url: "../opscustomerorder/delete",
-				    data: JSON.stringify(opsCustomerOrderIds),
-				    success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
-							alert(r.msg);
-						}
-					}
-				});
 			});
 		},
 		getInfo: function(opsCustomerOrderId){
