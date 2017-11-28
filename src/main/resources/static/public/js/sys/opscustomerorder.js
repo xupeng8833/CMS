@@ -1,7 +1,14 @@
 $(function () {
-	/*$.get("../public/js/data/province.json", function(data){
-		alert(data);
-	});*/
+	$.ajax({
+		type:"get",
+		url:"../public/js/data/province.json",
+		async:false,
+		success:function(data){
+			console.log(data);
+			alert(data);
+		}
+	});
+	
     $("#jqGrid").jqGrid({
         url: '../opscustomerorder/list',
         datatype: "json",
@@ -58,7 +65,6 @@ function refundment(id){
 }
 
 
-
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
@@ -74,7 +80,7 @@ var vm = new Vue({
 		title: null,
 		opsCustomerOrder: {},
 		
-		arr: '../public/js/data/province.json',
+		arr: '',
 		prov: '',
 		city: '',
 		district: '区',
