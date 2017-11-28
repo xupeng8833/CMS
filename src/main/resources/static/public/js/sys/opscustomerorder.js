@@ -57,18 +57,25 @@ var vm = new Vue({
 	el:'#rrapp',
 	data:{
 	   q:{
-			reportNum: null,
-			productName: null,
-			machineNum: null,
-			userId: null
+	    opsCustomerOrderId: null,
+		productName: null,
+		machineNum: null,
+		userId: null
 		},
+		items:[{text:'A',value:'a'},{text:'B',value:'b'},{text:'C',value:'c'}],
+		selected:'',
 		showList: true,
 		title: null,
 		opsCustomerOrder: {}
 	},
 	methods: {
 		query: function () {
-			vm.reload();
+			$("#jqGrid").jqGrid('setGridParam',{ 
+                postData:{'opsCustomerOrderId': vm.q.opsCustomerOrderId,'orderId': vm.q.orderId
+                	,'productName': vm.q.productName,'machineNum': vm.q.machineNum
+                	,'benginTime': $("#benginTime").val(),'endTime': $("#endTime").val()},
+                page:1 
+            }).trigger("reloadGrid");
 		},
 		add: function(){
 			vm.showList = false;
