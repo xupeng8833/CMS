@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>补货管理</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../public/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+<link rel="stylesheet" href="../public/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../public/plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../public/css/main.css">
+<script src="../public/libs/jquery.min.js"></script>
+<script src="../public/plugins/layer/layer.js"></script>
+<script src="../public/libs/bootstrap.min.js"></script>
+<script src="../public/libs/vue.min.js"></script>
+<script src="../public/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../public/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../public/plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../public/js/common.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.reportNum" @keyup.enter="query" placeholder="报修单号">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.productName" @keyup.enter="query" placeholder="商品名称">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.machineNum" @keyup.enter="query" placeholder="售卖机编号">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="购买人ID">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.reportNum" @keyup.enter="query" placeholder="报修单号">
+			</div>
+			
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.productName" @keyup.enter="query" placeholder="商品名称">
+			</div>
+			
+			<a class="btn btn-default" @click="query">查询</a>
+		
+			<a v-if="hasPermission('replenishmentmanage:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			<a v-if="hasPermission('replenishmentmanage:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a v-if="hasPermission('replenishmentmanage:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											<div class="form-group">
+			   	<div class="col-sm-2 control-label">店长编号</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsStoreManagerId" placeholder="店长编号"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">店名</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsStoreName" placeholder="店名"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">联系人姓名</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsLinkmanName" placeholder="联系人姓名"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">上次补货时间</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.createTime" placeholder="上次补货时间"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">是否有申请 0代表没有 1代表有</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsApplicationStatus" placeholder="是否有申请 0代表没有 1代表有"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">上次补纸量</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsLastAmountPaper" placeholder="上次补纸量"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">期初纸量</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsInitialPaperQuantity" placeholder="期初纸量"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">当前出纸率</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsPaperYield" placeholder="当前出纸率"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">剩余纸量</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsPaperSurplus" placeholder="剩余纸量"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">单日出纸量</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsPaperOutput" placeholder="单日出纸量"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">补货周期</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsReplenishmentCycle" placeholder="补货周期"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">商品名称</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsProductName" placeholder="商品名称"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">商品类型</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsProductType" placeholder="商品类型"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">异常状态</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsErrorState" placeholder="异常状态"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">异常备注</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="replenishmentManage.opsErrorRemark" placeholder="异常备注"/>
+			    </div>
+			</div>
+							<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="../public/js/sys/replenishmentmanage.js"></script>
+</body>
+</html>

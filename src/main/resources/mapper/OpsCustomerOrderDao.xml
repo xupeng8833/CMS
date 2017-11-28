@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.OpsCustomerOrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.OpsCustomerOrderEntity" id="opsCustomerOrderMap">
+        <result property="opsCustomerOrderId" column="ops_customer_order_id"/>
+        <result property="opsProductName" column="ops_product_name"/>
+        <result property="opsCustomerId" column="ops_customer_id"/>
+        <result property="opsProductAmount" column="ops_product_amount"/>
+        <result property="opsProductStatus" column="ops_product_status"/>
+        <result property="opsStoreName" column="ops_store_name"/>
+        <result property="opsStoreAddress" column="ops_store_address"/>
+        <result property="opsDesktopMachineId" column="ops_desktop_machine_id"/>
+        <result property="opsTransactionMode" column="ops_transaction_mode"/>
+        <result property="opsTransactionStatus" column="ops_transaction_status"/>
+        <result property="opsScene" column="ops_scene"/>
+        <result property="opsDomain" column="ops_domain"/>
+        <result property="opsType" column="ops_type"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.OpsCustomerOrderEntity">
+		select * from tb_ops_customer_order where ops_customer_order_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.OpsCustomerOrderEntity">
+		select * from tb_ops_customer_order
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by ops_customer_order_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_ops_customer_order 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.OpsCustomerOrderEntity" useGeneratedKeys="true" keyProperty="opsCustomerOrderId">
+		insert into tb_ops_customer_order
+		(
+			`ops_product_name`, 
+			`ops_customer_id`, 
+			`ops_product_amount`, 
+			`ops_product_status`, 
+			`ops_store_name`, 
+			`ops_store_address`, 
+			`ops_desktop_machine_id`, 
+			`ops_transaction_mode`, 
+			`ops_transaction_status`, 
+			`ops_scene`, 
+			`ops_domain`, 
+			`ops_type`, 
+			`create_time`
+		)
+		values
+		(
+			#{opsProductName}, 
+			#{opsCustomerId}, 
+			#{opsProductAmount}, 
+			#{opsProductStatus}, 
+			#{opsStoreName}, 
+			#{opsStoreAddress}, 
+			#{opsDesktopMachineId}, 
+			#{opsTransactionMode}, 
+			#{opsTransactionStatus}, 
+			#{opsScene}, 
+			#{opsDomain}, 
+			#{opsType}, 
+			#{createTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.OpsCustomerOrderEntity">
+		update tb_ops_customer_order 
+		<set>
+			<if test="opsProductName != null">`ops_product_name` = #{opsProductName}, </if>
+			<if test="opsCustomerId != null">`ops_customer_id` = #{opsCustomerId}, </if>
+			<if test="opsProductAmount != null">`ops_product_amount` = #{opsProductAmount}, </if>
+			<if test="opsProductStatus != null">`ops_product_status` = #{opsProductStatus}, </if>
+			<if test="opsStoreName != null">`ops_store_name` = #{opsStoreName}, </if>
+			<if test="opsStoreAddress != null">`ops_store_address` = #{opsStoreAddress}, </if>
+			<if test="opsDesktopMachineId != null">`ops_desktop_machine_id` = #{opsDesktopMachineId}, </if>
+			<if test="opsTransactionMode != null">`ops_transaction_mode` = #{opsTransactionMode}, </if>
+			<if test="opsTransactionStatus != null">`ops_transaction_status` = #{opsTransactionStatus}, </if>
+			<if test="opsScene != null">`ops_scene` = #{opsScene}, </if>
+			<if test="opsDomain != null">`ops_domain` = #{opsDomain}, </if>
+			<if test="opsType != null">`ops_type` = #{opsType}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}</if>
+		</set>
+		where ops_customer_order_id = #{opsCustomerOrderId}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_ops_customer_order where ops_customer_order_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_ops_customer_order where ops_customer_order_id in 
+		<foreach item="opsCustomerOrderId" collection="array" open="(" separator="," close=")">
+			#{opsCustomerOrderId}
+		</foreach>
+	</delete>
+
+</mapper>

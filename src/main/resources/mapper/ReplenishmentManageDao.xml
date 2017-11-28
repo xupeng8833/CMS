@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.ReplenishmentManageDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.ReplenishmentManageEntity" id="replenishmentManageMap">
+        <result property="opsReplenishmentNum" column="ops_replenishment_num"/>
+        <result property="opsStoreManagerId" column="ops_store_manager_id"/>
+        <result property="opsStoreName" column="ops_store_name"/>
+        <result property="opsLinkmanName" column="ops_linkman_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="opsApplicationStatus" column="ops_application_status"/>
+        <result property="opsLastAmountPaper" column="ops_last_amount_paper"/>
+        <result property="opsInitialPaperQuantity" column="ops_initial_paper_quantity"/>
+        <result property="opsPaperYield" column="ops_paper_yield"/>
+        <result property="opsPaperSurplus" column="ops_paper_surplus"/>
+        <result property="opsPaperOutput" column="ops_paper_output"/>
+        <result property="opsReplenishmentCycle" column="ops_replenishment_cycle"/>
+        <result property="opsProductName" column="ops_product_name"/>
+        <result property="opsProductType" column="ops_product_type"/>
+        <result property="opsErrorState" column="ops_error_state"/>
+        <result property="opsErrorRemark" column="ops_error_remark"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.ReplenishmentManageEntity">
+		select * from tb_replenishment_manage where ops_replenishment_num = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.ReplenishmentManageEntity">
+		select * from tb_replenishment_manage
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by ops_replenishment_num desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_replenishment_manage 
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.ReplenishmentManageEntity" useGeneratedKeys="true" keyProperty="opsReplenishmentNum">
+		insert into tb_replenishment_manage
+		(
+			`ops_store_manager_id`, 
+			`ops_store_name`, 
+			`ops_linkman_name`, 
+			`create_time`, 
+			`ops_application_status`, 
+			`ops_last_amount_paper`, 
+			`ops_initial_paper_quantity`, 
+			`ops_paper_yield`, 
+			`ops_paper_surplus`, 
+			`ops_paper_output`, 
+			`ops_replenishment_cycle`, 
+			`ops_product_name`, 
+			`ops_product_type`, 
+			`ops_error_state`, 
+			`ops_error_remark`
+		)
+		values
+		(
+			#{opsStoreManagerId}, 
+			#{opsStoreName}, 
+			#{opsLinkmanName}, 
+			#{createTime}, 
+			#{opsApplicationStatus}, 
+			#{opsLastAmountPaper}, 
+			#{opsInitialPaperQuantity}, 
+			#{opsPaperYield}, 
+			#{opsPaperSurplus}, 
+			#{opsPaperOutput}, 
+			#{opsReplenishmentCycle}, 
+			#{opsProductName}, 
+			#{opsProductType}, 
+			#{opsErrorState}, 
+			#{opsErrorRemark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.ReplenishmentManageEntity">
+		update tb_replenishment_manage 
+		<set>
+			<if test="opsStoreManagerId != null">`ops_store_manager_id` = #{opsStoreManagerId}, </if>
+			<if test="opsStoreName != null">`ops_store_name` = #{opsStoreName}, </if>
+			<if test="opsLinkmanName != null">`ops_linkman_name` = #{opsLinkmanName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="opsApplicationStatus != null">`ops_application_status` = #{opsApplicationStatus}, </if>
+			<if test="opsLastAmountPaper != null">`ops_last_amount_paper` = #{opsLastAmountPaper}, </if>
+			<if test="opsInitialPaperQuantity != null">`ops_initial_paper_quantity` = #{opsInitialPaperQuantity}, </if>
+			<if test="opsPaperYield != null">`ops_paper_yield` = #{opsPaperYield}, </if>
+			<if test="opsPaperSurplus != null">`ops_paper_surplus` = #{opsPaperSurplus}, </if>
+			<if test="opsPaperOutput != null">`ops_paper_output` = #{opsPaperOutput}, </if>
+			<if test="opsReplenishmentCycle != null">`ops_replenishment_cycle` = #{opsReplenishmentCycle}, </if>
+			<if test="opsProductName != null">`ops_product_name` = #{opsProductName}, </if>
+			<if test="opsProductType != null">`ops_product_type` = #{opsProductType}, </if>
+			<if test="opsErrorState != null">`ops_error_state` = #{opsErrorState}, </if>
+			<if test="opsErrorRemark != null">`ops_error_remark` = #{opsErrorRemark}</if>
+		</set>
+		where ops_replenishment_num = #{opsReplenishmentNum}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_replenishment_manage where ops_replenishment_num = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_replenishment_manage where ops_replenishment_num in 
+		<foreach item="opsReplenishmentNum" collection="array" open="(" separator="," close=")">
+			#{opsReplenishmentNum}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-28 09:29:50
+Date: 2017-11-28 17:10:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -76,6 +76,11 @@ INSERT INTO `sys_log` VALUES ('21', 'admin', '修改菜单', 'com.system.control
 INSERT INTO `sys_log` VALUES ('22', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"icon\":\"fa fa-credit-card\",\"name\":\"提现结算申请\",\"orderNum\":10,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update\",\"type\":1,\"url\":\"sys/presentapplication.html\"}', '127.0.0.1', '2017-11-22 09:42:57');
 INSERT INTO `sys_log` VALUES ('23', 'admin', '保存角色', 'com.system.controller.SysRoleController.save()', '{\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,28,30,31,32],\"remark\":\"xxx\",\"roleName\":\"2\"}', '127.0.0.1', '2017-11-22 14:29:03');
 INSERT INTO `sys_log` VALUES ('24', 'admin', '保存用户', 'com.system.controller.SysUserController.save()', '{\"email\":\"962270789@qq.com\",\"mobile\":\"13800000\",\"roleIdList\":[2,1],\"status\":1,\"username\":\"xupeng\"}', '127.0.0.1', '2017-11-27 10:40:09');
+INSERT INTO `sys_log` VALUES ('25', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"订单列表管理-new\",\"orderNum\":7,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"opscustomerorder:list\",\"type\":1,\"url\":\"sys/opscustomerorder.html\"}', '127.0.0.1', '2017-11-28 15:23:44');
+INSERT INTO `sys_log` VALUES ('26', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-th-list\",\"menuId\":36,\"name\":\"订单列表管理-new\",\"orderNum\":8,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"opscustomerorder:list\",\"type\":1,\"url\":\"sys/opscustomerorder.html\"}', '127.0.0.1', '2017-11-28 15:24:07');
+INSERT INTO `sys_log` VALUES ('27', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-th-list\",\"menuId\":36,\"name\":\"订单列表管理-new\",\"orderNum\":11,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"opscustomerorder:list\",\"type\":1,\"url\":\"sys/opscustomerorder.html\"}', '127.0.0.1', '2017-11-28 16:30:25');
+INSERT INTO `sys_log` VALUES ('28', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"补货管理-new\",\"orderNum\":12,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"replenishmentmanage:list\",\"type\":1,\"url\":\"sys/replenishmentmanage.html\"}', '127.0.0.1', '2017-11-28 16:59:28');
+INSERT INTO `sys_log` VALUES ('29', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-file-text\",\"menuId\":37,\"name\":\"补货管理-new\",\"orderNum\":12,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"replenishmentmanage:list\",\"type\":1,\"url\":\"sys/replenishmentmanage.html\"}', '127.0.0.1', '2017-11-28 16:59:44');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -91,7 +96,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -119,6 +124,8 @@ INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:expo
 INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
 INSERT INTO `sys_menu` VALUES ('34', '0', '补货管理', 'sys/replenishment.html', 'sys:replenishment:list,sys:replenishment:update,sys:replenishment:info', '1', 'fa fa-file-text', '9');
 INSERT INTO `sys_menu` VALUES ('35', '0', '提现结算申请', 'sys/presentapplication.html', 'sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update', '1', 'fa fa-credit-card', '10');
+INSERT INTO `sys_menu` VALUES ('36', '0', '订单列表管理-new', 'sys/opscustomerorder.html', 'opscustomerorder:list', '1', 'fa fa-th-list', '11');
+INSERT INTO `sys_menu` VALUES ('37', '0', '补货管理-new', 'sys/replenishmentmanage.html', 'replenishmentmanage:list', '1', 'fa fa-file-text', '12');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -332,11 +339,13 @@ CREATE TABLE `tb_ops_customer_order` (
   `ops_type` varchar(50) NOT NULL COMMENT '类型',
   `create_time` datetime DEFAULT NULL COMMENT '交易时间时间',
   PRIMARY KEY (`ops_customer_order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户订单表';
 
 -- ----------------------------
 -- Records of tb_ops_customer_order
 -- ----------------------------
+INSERT INTO `tb_ops_customer_order` VALUES ('1', '1', '1', '1.00', '1', '1', '1', '1212', '1', '1', '1', '1', '1', '2017-11-21 15:43:02');
+INSERT INTO `tb_ops_customer_order` VALUES ('2', '2', '2', '2.00', '2', '2', '2', '2222', '2', '2', '2', '2', '2', '2017-11-29 15:43:40');
 
 -- ----------------------------
 -- Table structure for tb_ops_platform_revenue
@@ -589,11 +598,13 @@ CREATE TABLE `tb_replenishment_manage` (
   `ops_error_state` varchar(100) NOT NULL COMMENT '异常状态',
   `ops_error_remark` varchar(100) NOT NULL COMMENT '异常备注',
   PRIMARY KEY (`ops_replenishment_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='补货管理';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='补货管理';
 
 -- ----------------------------
 -- Records of tb_replenishment_manage
 -- ----------------------------
+INSERT INTO `tb_replenishment_manage` VALUES ('1', '1', '1', '0', '2017-11-21 17:02:06', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '1');
+INSERT INTO `tb_replenishment_manage` VALUES ('2', '2', '2', '0', '2017-11-29 17:02:34', '0', '0', '0', '0', '0', '0', '2', '2', '2', '2', '2');
 
 -- ----------------------------
 -- Table structure for tb_report
