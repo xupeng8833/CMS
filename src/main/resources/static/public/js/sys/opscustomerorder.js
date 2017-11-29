@@ -1,12 +1,7 @@
 $(function () {
-	$.ajax({
-		type:"get",
-		url:"../public/js/data/province.json",
-		async:false,
-		success:function(data){
-			console.log(data);
-			alert(data);
-		}
+
+	$("#distpicker").distpicker({
+	   autoSelect: false
 	});
 	
     $("#jqGrid").jqGrid({
@@ -62,6 +57,7 @@ $(function () {
 //退款操作
 function refundment(id){
 	alert(id);
+	console.log($("#province").val());
 }
 
 
@@ -78,20 +74,13 @@ var vm = new Vue({
 		selected:'',
 		showList: true,
 		title: null,
-		opsCustomerOrder: {},
-		
-		arr: '',
-		prov: '',
-		city: '',
-		district: '区',
-		cityArr: [],
-		districtArr: []
+		opsCustomerOrder: {}
 	},
 	methods: {
 		query: function () {
 			$("#jqGrid").jqGrid('setGridParam',{ 
-                postData:{'opsCustomerOrderId': vm.q.opsCustomerOrderId,'orderId': vm.q.orderId
-                	,'productName': vm.q.productName,'machineNum': vm.q.machineNum
+                postData:{'opsCustomerOrderId': vm.q.opsCustomerOrderId,'opsStoreName': vm.q.opsStoreName
+                	,'opsDesktopMachineId': vm.q.opsDesktopMachineId,'machineNum': vm.q.machineNum
                 	,'benginTime': $("#benginTime").val(),'endTime': $("#endTime").val()},
                 page:1 
             }).trigger("reloadGrid");
@@ -132,6 +121,9 @@ var vm = new Vue({
 			$.get("../opscustomerorder/info/"+opsCustomerOrderId, function(r){
                 vm.opsCustomerOrder = r.opsCustomerOrder;
             });
+		},
+		exportExl: function (event) {
+			window.location.href="../opscustomerorder/exportExl";
 		},
 		reload: function (event) {
 			vm.showList = true;

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50622
+Source Server         : mysql1
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : cms
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-11-28 21:03:50
+Date: 2017-11-29 17:39:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -81,6 +81,9 @@ INSERT INTO `sys_log` VALUES ('26', 'admin', '修改菜单', 'com.system.control
 INSERT INTO `sys_log` VALUES ('27', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-th-list\",\"menuId\":36,\"name\":\"订单列表管理-new\",\"orderNum\":11,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"opscustomerorder:list\",\"type\":1,\"url\":\"sys/opscustomerorder.html\"}', '127.0.0.1', '2017-11-28 16:30:25');
 INSERT INTO `sys_log` VALUES ('28', 'admin', '保存菜单', 'com.system.controller.SysMenuController.save()', '{\"name\":\"补货管理-new\",\"orderNum\":12,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"replenishmentmanage:list\",\"type\":1,\"url\":\"sys/replenishmentmanage.html\"}', '127.0.0.1', '2017-11-28 16:59:28');
 INSERT INTO `sys_log` VALUES ('29', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"icon\":\"fa fa-file-text\",\"menuId\":37,\"name\":\"补货管理-new\",\"orderNum\":12,\"parentId\":0,\"parentName\":\"一级菜单\",\"perms\":\"replenishmentmanage:list\",\"type\":1,\"url\":\"sys/replenishmentmanage.html\"}', '127.0.0.1', '2017-11-28 16:59:44');
+INSERT INTO `sys_log` VALUES ('30', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":32,\"name\":\"数据导出\",\"orderNum\":0,\"parentId\":36,\"parentName\":\"订单列表管理-new\",\"perms\":\"opscustomerorder:exportExl\",\"type\":2}', '127.0.0.1', '2017-11-29 16:34:07');
+INSERT INTO `sys_log` VALUES ('31', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":32,\"name\":\"数据导出\",\"orderNum\":0,\"parentId\":31,\"parentName\":\"订单管理\",\"perms\":\"sys:order:exportExl\",\"type\":2}', '127.0.0.1', '2017-11-29 16:48:00');
+INSERT INTO `sys_log` VALUES ('32', 'admin', '修改菜单', 'com.system.controller.SysMenuController.update()', '{\"menuId\":32,\"name\":\"数据导出\",\"orderNum\":0,\"parentId\":36,\"parentName\":\"订单列表管理-new\",\"perms\":\"opscustomerorder:exportExl\",\"type\":2}', '127.0.0.1', '2017-11-29 17:38:46');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -120,7 +123,7 @@ INSERT INTO `sys_menu` VALUES ('26', '4', '删除', null, 'sys:menu:delete', '2'
 INSERT INTO `sys_menu` VALUES ('28', '1', '代码生成器', 'sys/generator.html', 'sys:generator:list,sys:generator:code', '1', 'fa fa-rocket', '8');
 INSERT INTO `sys_menu` VALUES ('30', '0', '意见反馈管理', 'sys/feedback.html', 'sys:feedback:list,sys:feedback:info,sys:feedback:save,sys:feedback:update,sys:feedback:delete', '1', 'fa fa-pencil-square', '1');
 INSERT INTO `sys_menu` VALUES ('31', '0', '订单管理', 'sys/order.html', 'sys:order:list', '1', 'fa fa-th-list', '7');
-INSERT INTO `sys_menu` VALUES ('32', '31', '数据导出', null, 'sys:order:exportExl', '2', null, '0');
+INSERT INTO `sys_menu` VALUES ('32', '36', '数据导出', null, 'opscustomerorder:exportExl', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('33', '0', '保修信息管理', 'sys/report.html', 'sys:report:list,sys:report:update,sys:report:info', '1', 'fa fa-cog', '8');
 INSERT INTO `sys_menu` VALUES ('34', '0', '补货管理', 'sys/replenishment.html', 'sys:replenishment:list,sys:replenishment:update,sys:replenishment:info', '1', 'fa fa-file-text', '9');
 INSERT INTO `sys_menu` VALUES ('35', '0', '提现结算申请', 'sys/presentapplication.html', 'sys:presentapplication:list,sys:presentapplication:info,sys:presentapplication:update', '1', 'fa fa-credit-card', '10');

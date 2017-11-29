@@ -27,14 +27,18 @@
 
 	<select id="queryList" resultType="com.system.entity.OpsCustomerOrderEntity">
 		select * from tb_ops_customer_order
-        <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
-            </when>
-			<otherwise>
-                order by ops_customer_order_id desc
-			</otherwise>
-        </choose>
+       <where>
+			<if test="opsCustomerOrderId != null and opsCustomerOrderId.trim() != ''">
+				and ops_customer_order_id like concat('%', #{opsCustomerOrderId}, '%') 
+			</if>
+			<if test="opsStoreName != null and opsStoreName.trim() != ''">
+				and ops_store_name like concat('%', #{opsStoreName}, '%') 
+			</if>
+			<if test="opsDesktopMachineId != null and opsDesktopMachineId.trim() != ''">
+				and ops_desktop_machine_id like concat('%', #{opsDesktopMachineId}, '%') 
+			</if>
+		</where>
+		order by ops_customer_order_id desc 
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

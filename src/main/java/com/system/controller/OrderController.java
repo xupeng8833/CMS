@@ -115,7 +115,6 @@ public class OrderController {
 			 
 		 }
 		 ArrayList fieldName=getFieldName();    //excel标题数据集
-	     ArrayList fieldData=dataList;    //excel数据内容
 		 
 	     String myexcel="订单管理";
          response.reset();
@@ -123,7 +122,7 @@ public class OrderController {
          response.setHeader("Content-Disposition", "attachment;filename=" + new String(myexcel.getBytes(),"iso-8859-1") + ".xls");
          response.setCharacterEncoding("utf-8");    
          OutputStream ouputStream = response.getOutputStream();   
-         ExcelFileGenerator efg=new ExcelFileGenerator(fieldName, fieldData);//调用另一个类的方法，详见下
+         ExcelFileGenerator efg=new ExcelFileGenerator(fieldName, dataList);//调用另一个类的方法，详见下
          try {
              HSSFWorkbook mybook = efg.expordExcel();//调用另一个类的方法，详见下
              mybook.write(ouputStream);//写入到输出流
