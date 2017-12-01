@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.SpDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.system.entity.SpEntity" id="spMap">
+        <result property="spId" column="sp_id"/>
+        <result property="spNm" column="sp_nm"/>
+        <result property="spPrice" column="sp_price"/>
+        <result property="spType" column="sp_type"/>
+        <result property="spGuige" column="sp_guige"/>
+        <result property="spPinpai" column="sp_pinpai"/>
+        <result property="spPn" column="sp_pn"/>
+        <result property="spStatus" column="sp_status"/>
+        <result property="spJiqiid" column="sp_jiqiid"/>
+        <result property="spImage" column="sp_image"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.system.entity.SpEntity">
+		select * from tb_sp where sp_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.system.entity.SpEntity">
+		select *
+		from tb_sp
+		<where>
+			<if test="spType != null and spType.trim() != ''">
+				and sp_type = #{spType} 
+			</if>
+			<if test="spNm != null and spNm.trim() != ''">
+				and sp_nm = #{spNm} 
+			</if>
+			<if test="spPn != null and spPn.trim() != ''">
+				and sp_pn = #{spPn} 
+			</if>
+			<if test="status != null">
+				and status = 1 
+			</if>
+		</where>
+		order by sp_id,sp_nm,sp_price,sp_type,sp_guige,sp_pinpai,sp_status
+      
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_sp 
+		<where>
+			<if test="spType != null and spType.trim() != ''">
+				and sp_type = #{spType} 
+			</if>
+			<if test="spNm != null and spNm.trim() != ''">
+				and sp_nm = #{spNm} 
+			</if>
+			<if test="spPn != null and spPn.trim() != ''">
+				and sp_pn = #{spPn} 
+			</if>
+			<if test="status != null">
+				and status = 1 
+			</if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.system.entity.SpEntity">
+		insert into tb_sp
+		(
+			`sp_nm`, 
+			`sp_price`, 
+			`sp_type`, 
+			`sp_guige`, 
+			`sp_pinpai`, 
+			`sp_pn`, 
+			`sp_status`, 
+			`sp_jiqiid`, 
+			`sp_image`,
+			`status`
+		)
+		values
+		(
+			#{spNm}, 
+			#{spPrice}, 
+			#{spType}, 
+			#{spGuige}, 
+			#{spPinpai}, 
+			#{spPn}, 
+			#{spStatus}, 
+			#{spJiqiid}, 
+			#{spImage},
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.entity.SpEntity">
+		update tb_sp 
+		<set>
+			<if test="spNm != null">`sp_nm` = #{spNm}, </if>
+			<if test="spPrice != null">`sp_price` = #{spPrice}, </if>
+			<if test="spType != null">`sp_type` = #{spType}, </if>
+			<if test="spGuige != null">`sp_guige` = #{spGuige}, </if>
+			<if test="spPinpai != null">`sp_pinpai` = #{spPinpai}, </if>
+			<if test="spPn != null">`sp_pn` = #{spPn}, </if>
+			<if test="spStatus != null">`sp_status` = #{spStatus}, </if>
+			<if test="spJiqiid != null">`sp_jiqiid` = #{spJiqiid}, </if>
+			<if test="spImage != null">`sp_image` = #{spImage}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where sp_id = #{spId}
+	</update>
+	
+	<update id="delete"  parameterType="com.system.entity.SpEntity">
+		update tb_sp 
+		set `status` = 0
+		where sp_id = #{spId}
+	</update>
+	
+	<delete id="deleteBatch">
+		delete from tb_sp where sp_id in 
+		<foreach item="spId" collection="array" open="(" separator="," close=")">
+			#{spId}
+		</foreach>
+	</delete>
+
+</mapper>
